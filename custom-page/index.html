@@ -1,0 +1,886 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Lnterlink的小屋 | Lnterlink的小屋</title><meta name="author" content="Lnterlink"><meta name="copyright" content="Lnterlink"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="POETRY SEA 2020 - Internet Poetry Phenomenon Research        body {       margin: 0;       padding: 0;       background-color: #000;       color: #fff;       font-family: &#39;Courier New&#39;, mon">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lnterlink的小屋">
+<meta property="og:url" content="https://lnterlink.site/custom-page/index.html">
+<meta property="og:site_name" content="Lnterlink的小屋">
+<meta property="og:description" content="POETRY SEA 2020 - Internet Poetry Phenomenon Research        body {       margin: 0;       padding: 0;       background-color: #000;       color: #fff;       font-family: &#39;Courier New&#39;, mon">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lnterlink.site/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png">
+<meta property="article:published_time" content="2025-07-20T12:34:18.348Z">
+<meta property="article:modified_time" content="2025-07-20T12:34:18.348Z">
+<meta property="article:author" content="Lnterlink">
+<meta property="article:tag" content="关键词">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lnterlink.site/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lnterlink.site/custom-page/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Lnterlink的小屋',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Lnterlink的小屋</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title"></h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="container" id="article-container"><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>POETRY SEA 2020 - Internet Poetry Phenomenon Research</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      overflow-x: hidden;
+    }
+
+    .cover {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pixel-line {
+      position: relative;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes fade-in-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .char-container {
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    .pixel-grid {
+      display: grid;
+      grid-gap: 2px;
+    }
+
+    .pixel {
+      width: 10px;
+      height: 10px;
+      background-color: #222;
+      border-radius: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .pixel.on {
+      background-color: #fff;
+      box-shadow: 0 0 3px #fff;
+    }
+
+    .pixel.flicker {
+      animation: flicker 0.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-top: 20px;
+      letter-spacing: 2px;
+      text-align: center;
+      max-width: 80%;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fade-in-up 1s ease 2.5s forwards;
+    }
+
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.03) 50%, transparent 50%);
+      background-size: 100% 3px;
+      pointer-events: none;
+      z-index: 2;
+      animation: scan 8s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      z-index: 3;
+      padding: 8px 16px;
+      border: 1px solid #fff;
+      opacity: 0;
+      animation: pulse 2s 3s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+
+    /* Content Page Styles */
+    .content-page {
+      display: none;
+      padding: 50px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .content-page h2 {
+      color: #fff;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      font-size: 1.5rem;
+    }
+
+    .data-highlight {
+      background-color: #111;
+      padding: 20px;
+      margin: 30px 0;
+      border-left: 3px solid #666;
+    }
+
+    .data-item {
+      margin: 15px 0;
+      color: #ccc;
+    }
+
+    .data-number {
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .poem-container {
+      background-color: #111;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 3px solid #444;
+      position: relative;
+    }
+
+    .poem-title {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .poem-author {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .poem-text {
+      color: #ddd;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .poem-source {
+      color: #666;
+      font-size: 0.8rem;
+      margin-top: 15px;
+      text-align: right;
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      background-color: #333;
+    }
+
+    .analysis {
+      background-color: #111;
+      padding: 20px;
+      margin: 30px 0;
+      border: 1px solid #333;
+    }
+
+    .analysis-title {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .analysis-text {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .pixel {
+        width: 6px;
+        height: 6px;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .scroll-down {
+        font-size: 0.8rem;
+      }
+
+      .content-page {
+        padding: 30px 15px;
+      }
+
+      .poem-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="cover" id="home">
+    <div class="scanlines"></div>
+    <div class="pixel-line" id="linePoetry"></div>
+    <div class="pixel-line" id="lineSea"></div>
+    <div class="pixel-line" id="lineYear"></div>
+    <p class="subtitle">Research on Chinese Internet Poetry Phenomenon<br>and Digital Humanities Exploration</p>
+    <p class="subtitle">简中互联网类诗歌文本采集与分析</p>
+    <div class="scroll-down" id="scrollDown">SCROLL DOWN</div>
+  </section>
+
+  <section class="content-page" id="content">
+    <h2>诗海2020
+    <br>——B站评论中的诗意众声采集计划</h2>
+    <p style="color: #aaa; line-height: 1.6;">“倘若人们在没有要求的地方写诗，那么，他们必有话要说。”
+——题记
+        <br>当世界按下暂停键，无数人开始在屏幕前驻足凝视。Bilibili，不再只是年轻人的娱乐阵地，它成为情绪的港口、思想的潮涌。人们在评论区留下三行、四行，甚至更长的诗句，仿佛在弹幕的浪涛间搭起一座座独立的诗岛。
+
+本项目《诗海2020》，尝试用程序重现这片匿名众声中的“诗性地栖居”。我们设计了一套评论分析系统，自动检索、筛选、标记那些自发形成的诗体评论，它们以三行以上的排布、节奏与留白，在B站这个以碎片与流行为主的平台上，构成了一种出人意料的集体抒情。
+    </p>
+    
+    <div class="data-highlight">
+      <div class="data-item">采集评论: <span class="data-number">50,000+</span> 条</div>
+      <div class="data-item">分析代码: <span class="data-number">2,000+</span> 行</div>
+      <div class="data-item">覆盖视频: <span class="data-number">1,000+</span> 个</div>
+      <div class="data-item">时间跨度:  <span class="data-number">2020至今</span></div>
+    </div>
+
+    <!-- 回文诗 -->
+    <div class="poem-container">
+      <div class="poem-title">回文诗</div>
+      <div class="poem-author">离奇的气力Official</div>
+      <div class="poem-text">
+月夜长明灯照廊
+
+明灯照廊人彷徨
+
+人彷徨时思秋水
+
+时思秋水月夜长
+      </div>
+      <div class="poem-source">发布于: 2021-08-31 | 点赞: 68</div>
+    </div>
+
+    <!-- 新诗 -->
+    <div class="poem-container">
+      <div class="poem-title">新诗</div>
+      <div class="poem-author">账号已注销</div>
+      <div class="poem-text">
+只要
+
+会打回车
+
+你就
+
+写了一首
+
+新诗
+
+[doge]
+      </div>
+      <div class="poem-source">发布于: 2021-08-31 | 点赞: 0</div>
+    </div>
+
+    <!-- 德令哈 -->
+    <div class="poem-container">
+      <div class="poem-title">姐姐，今夜我在德令哈</div>
+      <div class="poem-author">欢迎回来亲爱的魁拔丶</div>
+      <div class="poem-text">
+姐姐，今夜我在德令哈，夜色笼罩
+
+姐姐，我今夜只有戈壁
+
+草原尽头我两手空空
+
+悲痛时握不住一颗泪滴
+
+姐姐，今夜我在德令哈
+
+这是雨水中一座荒凉的城
+
+除了那些路过的和居住的
+
+德令哈......今夜
+
+这是唯一的，最后的，抒情。
+
+这是唯一的，最后的，草原。
+
+我把石头还给石头
+
+让胜利的胜利
+
+今夜青稞只属于他自己
+
+一切都在生长
+
+今夜我只有美丽的戈壁 空空
+
+姐姐，今夜我不关心人类，我只想你。
+
+​               -姐姐，今夜我在德令哈
+      </div>
+      <div class="poem-source">发布于: 2021-03-25 | 点赞: 53</div>
+    </div>
+
+    <!-- 七件寻常 -->
+    <div class="poem-container">
+      <div class="poem-title">七件寻常</div>
+      <div class="poem-author">徐小白的生活与诗</div>
+      <div class="poem-text">
+我能做点什么呢
+给我一个灵感，我就能用它创作出一个世界来
+有你曾许愿的四季花谷、南极光和慢热的热气球，更有我未见的真理与真相
+
+想成为那光，那道璀璨且被山丘掩盖的光
+即便成为不了那光，也想着成为它的见证与养料，它是真光，透明发烫，能照亮一切世间人
+
+吃饭，读书，相爱，睡觉，写诗创作，读书人的感官认知，终归是简单孤独的
+平淡是件好事，但读书人终究还是要做点读书人该做的事情的
+
+你想不想喝热奶茶？我立马给你调制一杯热奶茶
+夜色添过三颗白糖的热奶茶，湖面放映往昔、珍珠在海底畅游的香浓热奶茶
+
+笼罩市区的天空，依旧如千百年前那般蓝
+和堆叠的书籍一样浩瀚广阔，和理想一样洁净，和我一样蓝
+
+忍痛将性灵切割成七份，一份自由浪漫，一份高尚，一份平静，一份独处向往
+剩余的占比，皆是短暂徘徊的迷茫
+
+我有察觉到，本人的绝大多数诗歌，其实都并不快乐
+因为它们是由一名悲观主义者所创造的吧，因为里面没你吧，又或者说，因为里面有你吧
+
+我能成就大多数，亦能在人潮中众声喧哗
+
+我能做点什么呢
+我能爱你，我很快乐
+      </div>
+      <div class="poem-source">发布于: 2021-08-31 | 点赞: 7</div>
+    </div>
+
+    <!-- 一角钱 -->
+    <div class="poem-container">
+      <div class="poem-title">无题</div>
+      <div class="poem-author">陌上去爱</div>
+      <div class="poem-text">
+用一角钱
+买了一钩月
+月盈满杯
+流光溢溢
+听见什么轻声
+"唔！那只是一角钱而己"
+你说
+我孩子一样的掩面哭起来
+跺着脚
+满怀真情的
+仰起头
+噙着泪
+听见什么轻声
+"唔！哪只是一角钱而己"
+你说
+      </div>
+      <div class="poem-source">发布于: 2022-05-29 | 点赞: 8</div>
+    </div>
+
+    <!-- 悬溺 -->
+    <div class="poem-container">
+      <div class="poem-title">悬溺</div>
+      <div class="poem-author">马御琴</div>
+      <div class="poem-text">
+我为什么会在城市的管道里哭泣？
+我为什么放飞了几万盏灯火？
+我为什么要在海边看斜阳？
+星空，世界，宇宙，梵高笔下的画。
+棍哥，三狼，道理，产道里吹出的唢呐。
+哈姆阐释了我的马……
+​                ——otto 悬溺
+      </div>
+      <div class="poem-source">发布于: 2023-08-23 | 点赞: 14</div>
+    </div>
+
+    <!-- 评价 -->
+    <div class="poem-container">
+      <div class="poem-title">我的评价是</div>
+      <div class="poem-author">茄几OvO</div>
+      <div class="poem-text">
+我的评价是：
+1音色
+空灵、有穿透力、有磁性。
+2、感情
+具有感染力、深情、投入。
+3、歌曲节奏
+歌曲节奏把握得很好，对唱歌的技巧也演绎
+得很不错，跟专业歌手的水平非常的接近。
+4、演绎方式
+歌曲用自己的方式演绎出来，不输给原唱或超越原唱。
+5、唱歌的技巧
+真假音的灵活运用，高音部分令人惊奇，低音部分令人自愧不如，对歌曲的演唱如行云流水般自然。
+​           ---浙江省人民医院精神卫生科
+​                               孔医生署
+      </div>
+      <div class="poem-source">发布于: 2024-09-10 | 点赞: 11</div>
+    </div>
+
+    <!-- 乐观的诗 -->
+    <div class="poem-container">
+      <div class="poem-title">乐观的诗</div>
+      <div class="poem-author">临-乱-陆</div>
+      <div class="poem-text">
+高中时每当阅读理解，
+或鉴赏答案中出现，
+"表现了文人的积极乐观"时，
+我都很想反驳，
+那是对向死者的劝慰，
+每一个悲痛者的假面罢了，
+他们比乐观主义者能写出更乐观的诗
+      </div>
+      <div class="poem-source">发布于: 2021-03-26 | 点赞: 63031</div>
+    </div>
+
+    <h2>采集分析</h2>
+    <div class="analysis">
+      <div class="analysis-text">
+        • <strong>形式实验</strong>：包含回文诗、分行实验、评论文体等多种创新形式<br>
+        • <strong>情感表达</strong>：从"德令哈"的深沉到"一角钱"的童趣，展现多元情感谱系<br>
+        • <strong>数字痕迹</strong>：保留多种网络表情符号，体现原生数字语境<br>
+        • <strong>跨媒介</strong>：融合诗歌与乐评等异质文本<br>
+        • <strong>时间跨度</strong>：永不停息
+      </div>
+    </div>
+
+    <h2>结语</h2>
+    <p class="analysis-text">
+      《诗海2020》不仅是对B站评论区诗意的挖掘，更是对数字时代集体创作现象的探索。通过程序化的方式，我们希望能更好地理解这些匿名众声背后的情感与文化脉络。未来，我们将继续扩展数据集，进行更为深入的分析。
+
+    <button class="back-button" id="backButton">返回封面</button>
+  </section>
+
+  <script>
+    const pixelFont = {
+      'P': [[1,1,1,1,1,1,0],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,1,1,1,1,1,0],[1,0,0,0,0,0,0],[1,0,0,0,0,0,0],[1,0,0,0,0,0,0]],
+      'O': [[0,1,1,1,1,1,0],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[0,1,1,1,1,1,0]],
+      'E': [[1,1,1,1,1,1,1],[1,0,0,0,0,0,0],[1,0,0,0,0,0,0],[1,1,1,1,1,1,0],[1,0,0,0,0,0,0],[1,0,0,0,0,0,0],[1,1,1,1,1,1,1]],
+      'T': [[1,1,1,1,1,1,1],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0]],
+      'R': [[1,1,1,1,1,1,0],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,1,1,1,1,1,0],[1,0,0,1,0,0,0],[1,0,0,0,1,0,0],[1,0,0,0,0,1,1]],
+      'Y': [[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[0,1,0,0,0,1,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0],[0,0,1,1,1,0,0]],
+      'S': [[0,1,1,1,1,1,0],[1,0,0,0,0,0,1],[1,0,0,0,0,0,0],[0,1,1,1,1,1,0],[0,0,0,0,0,0,1],[1,0,0,0,0,0,1],[0,1,1,1,1,1,0]],
+      'A': [[0,1,1,1,1,1,0],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,1,1,1,1,1,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1]],
+      '2': [[0,1,1,1,1,1,0],[1,0,0,0,0,0,1],[0,0,0,0,0,0,1],[0,0,0,1,1,1,0],[0,1,1,0,0,0,0],[1,0,0,0,0,0,0],[1,1,1,1,1,1,1]],
+      '0': [[0,1,1,1,1,1,0],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[1,0,0,0,0,0,1],[0,1,1,1,1,1,0]],
+      ' ': [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
+    };
+
+    function createPixelText(text, containerId, delay) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      setTimeout(() => {
+        container.style.animation = 'fade-in-up 1s ease forwards';
+        
+        for (let char of text.toUpperCase()) {
+          if (pixelFont[char]) {
+            const charContainer = document.createElement('div');
+            charContainer.className = 'char-container';
+
+            const grid = document.createElement('div');
+            grid.className = 'pixel-grid';
+            grid.style.gridTemplateRows = `repeat(${pixelFont[char].length}, 1fr)`;
+            grid.style.gridTemplateColumns = `repeat(${pixelFont[char][0].length}, 1fr)`;
+
+            for (let row = 0; row < pixelFont[char].length; row++) {
+              for (let col = 0; col < pixelFont[char][row].length; col++) {
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                if (pixelFont[char][row][col] === 1) {
+                  pixel.classList.add('on');
+                  if (Math.random() > 0.9) pixel.classList.add('flicker');
+                }
+                grid.appendChild(pixel);
+              }
+            }
+
+            charContainer.appendChild(grid);
+            container.appendChild(charContainer);
+          }
+        }
+      }, delay);
+    }
+
+    function randomFlicker() {
+      const pixels = document.querySelectorAll('.pixel.on');
+      if (pixels.length > 0) {
+        const randomPixel = pixels[Math.floor(Math.random() * pixels.length)];
+        randomPixel.classList.add('flicker');
+        setTimeout(() => {
+          randomPixel.classList.remove('flicker');
+        }, 300);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 创建封面文字
+      createPixelText('POETRY', 'linePoetry', 0);
+      createPixelText('SEA', 'lineSea', 1000);
+      createPixelText('2020', 'lineYear', 2000);
+
+      setInterval(randomFlicker, 100);
+
+      // 添加像素动画
+      setTimeout(() => {
+        const pixels = document.querySelectorAll('.pixel');
+        pixels.forEach((pixel, index) => {
+          setTimeout(() => {
+            if (pixel.classList.contains('on')) {
+              pixel.style.transform = 'scale(1.3)';
+              setTimeout(() => pixel.style.transform = 'scale(1)', 150);
+            }
+          }, index * 10);
+        });
+      }, 3000);
+
+      // 滚动或点击进入内容页
+      const scrollDown = document.getElementById('scrollDown');
+      const backButton = document.getElementById('backButton');
+      const homeSection = document.getElementById('home');
+      const contentSection = document.getElementById('content');
+
+      scrollDown.addEventListener('click', () => {
+        homeSection.style.display = 'none';
+        contentSection.style.display = 'block';
+        window.scrollTo(0, 0);
+      });
+
+      backButton.addEventListener('click', () => {
+        contentSection.style.display = 'none';
+        homeSection.style.display = 'flex';
+      });
+
+      // 也可以滚动进入
+      window.addEventListener('wheel', (e) => {
+        if (homeSection.style.display !== 'none' && e.deltaY > 0) {
+          homeSection.style.display = 'none';
+          contentSection.style.display = 'block';
+          window.scrollTo(0, 0);
+        }
+      });
+    });
+  </script>
+</body>
+</html></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lnterlink</div><div class="author-info-description">愿爱无忧 --maojiangjiang492@gmail.com</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Lnterlink"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Lnterlink" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:maojiangjiang492@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">你好，这里是我的博客！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/09/%E6%8F%89%E6%90%93%E8%B5%B7%E6%9D%A5%E7%9A%84%E6%96%87%E5%AD%97/" title="无标题">无标题</a><time datetime="2025-06-09T04:37:29.514Z" title="发表于 2025-06-09 12:37:29">2025-06-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/06/%E8%A7%86%E9%A2%91%E4%B8%8E%E7%BD%AE%E9%A1%B6%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/" title="无标题">无标题</a><time datetime="2025-06-06T11:34:06.237Z" title="发表于 2025-06-06 19:34:06">2025-06-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/01/Lnterlink_%E4%B8%AA%E4%BA%BA%E4%BD%9C%E5%93%81%E9%9B%86/" title="个人作品集">个人作品集</a><time datetime="2025-05-31T16:00:00.000Z" title="发表于 2025-06-01 00:00:00">2025-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/29/%E6%96%B0%E9%97%BB%E5%AD%A6%E6%A6%82%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89%E6%96%B0%E9%97%BB%E5%AD%A6%E7%9A%84%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9/" title="新闻学概论（三）新闻学的主要内容">新闻学概论（三）新闻学的主要内容</a><time datetime="2025-05-29T14:00:00.000Z" title="发表于 2025-05-29 22:00:00">2025-05-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/29/%E7%BA%AA%E5%AE%9E%E6%91%84%E5%BD%B15.29%20%E6%96%B0%E9%97%BB%E6%91%84%E5%BD%B1%E5%88%9B%E4%BD%9C/" title="纪实摄影5.29 新闻摄影创作">纪实摄影5.29 新闻摄影创作</a><time datetime="2025-05-29T08:00:00.000Z" title="发表于 2025-05-29 16:00:00">2025-05-29</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%AA%E8%BE%91/"><span class="card-category-list-name">剪辑</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">技术</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%90%86%E8%AE%BA/"><span class="card-category-list-name">理论</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="card-category-list-name">编程</span><span class="card-category-list-count">4</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%BC%96%E8%BE%91/" style="font-size: 1.1em; color: #999">编辑</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.5em; color: #99a9bf">笔记</a> <a href="/tags/AE/" style="font-size: 1.1em; color: #999">AE</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.37em; color: #99a4b2">教程</a> <a href="/tags/%E6%96%B0%E9%97%BB%E5%AD%A6/" style="font-size: 1.23em; color: #999ea6">新闻学</a> <a href="/tags/%E5%90%8E%E6%9C%9F/" style="font-size: 1.1em; color: #999">后期</a> <a href="/tags/%E7%BA%AA%E5%AE%9E%E6%91%84%E5%BD%B1/" style="font-size: 1.1em; color: #999">纪实摄影</a> <a href="/tags/Python/" style="font-size: 1.23em; color: #999ea6">Python</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">14</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-07-20T15:53:18.385Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Lnterlink</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">愿作一切美好的信使</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><div id="aplayer"></div><script>
+document.addEventListener('DOMContentLoaded', function() {
+  new APlayer({
+    container: document.getElementById('aplayer'),
+    fixed: true,
+    loop: 'all',
+    autoplay: false,
+    mutex: true,
+    order: 'random',
+    audio: [
+      {
+        title: '个人编曲作品-三月语',
+        author: 'Lnterlink',
+        url: '/music/三月练习.mp3',
+        cover: 'https://y.qq.com/music/photo_new/T062R300x300M000000tke4v1zaB6q.jpg'
+      },
+      {
+        title: '个人编曲作品-尾声',
+        author: 'Lnterlink',
+        url: '/music/尾声.mp3',
+        cover: 'https://y.qq.com/music/photo_new/T062R300x300M000000tke4v1zaB6q.jpg'
+      },
+    ]
+  });
+});
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="输入关键词搜索" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
