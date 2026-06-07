@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我们之间 · 交互叙事作品</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&family=ZCOOL+KuaiLe&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== 加载画面 ===== -->
+<div class="loading-screen" id="loading-screen">
+    <div class="loading-content">
+        <div class="loading-tower">
+            <div class="loading-tower-body"></div>
+            <div class="loading-tower-light"></div>
+        </div>
+        <div class="loading-bar-track">
+            <div class="loading-bar-fill" id="loading-bar"></div>
+        </div>
+        <div class="loading-text">正在连接线路...</div>
+    </div>
+</div>
+
+<!-- ===== 浮动粒子层 ===== -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- ===== 导航栏 ===== -->
+<nav class="nav-bar" id="nav-bar">
+    <div class="nav-logo">我们之间</div>
+    <div class="nav-links">
+        <a href="#hero" class="nav-link active" data-section="hero">序</a>
+        <a href="#timeline" class="nav-link" data-section="timeline">时间线</a>
+        <a href="#novel" class="nav-link" data-section="novel">阅读</a>
+        <a href="#gallery" class="nav-link" data-section="gallery">瞬间</a>
+        <a href="#ending" class="nav-link" data-section="ending">终章</a>
+    </div>
+    <button class="nav-menu-btn" id="nav-menu-btn" aria-label="菜单">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ===== 移动端菜单 ===== -->
+<div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-inner">
+        <a href="#hero" class="mobile-menu-link">序</a>
+        <a href="#timeline" class="mobile-menu-link">时间线</a>
+        <a href="#novel" class="mobile-menu-link">阅读</a>
+        <a href="#gallery" class="mobile-menu-link">瞬间</a>
+        <a href="#ending" class="mobile-menu-link">终章</a>
+    </div>
+</div>
+
+<!-- ===== 区段1：Hero 开场 ===== -->
+<section class="section section-hero" id="hero">
+    <div class="hero-bg">
+        <div class="hero-tower-silhouette"></div>
+        <div class="hero-stars" id="hero-stars"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-title-group">
+            <div class="hero-pre-title reveal-text" data-delay="600">一段关于输电塔与守望的故事</div>
+            <h1 class="hero-title">
+                <span class="hero-char" data-char="我">我</span>
+                <span class="hero-char" data-char="们">们</span>
+                <span class="hero-char" data-char="之">之</span>
+                <span class="hero-char" data-char="间">间</span>
+            </h1>
+            <div class="hero-line"></div>
+            <p class="hero-subtitle reveal-text" data-delay="1800">交互叙事作品 · 像素风视觉小说</p>
+        </div>
+        <div class="hero-scroll-hint">
+            <span>向下滚动</span>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </div>
+    <div class="hero-light-beam"></div>
+</section>
+
+<!-- ===== 区段2：时间线 ===== -->
+<section class="section section-timeline" id="timeline">
+    <div class="section-header">
+        <h2 class="section-title reveal-up">时间线</h2>
+        <p class="section-desc reveal-up" data-delay="200">从2017到2025，一条线路连接的两段人生</p>
+    </div>
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div class="timeline-progress" id="timeline-progress"></div>
+
+        <div class="timeline-item" data-year="2017" data-index="0">
+            <div class="timeline-dot"><span>2017</span></div>
+            <div class="timeline-card">
+                <div class="timeline-card-year">2017 · 夏</div>
+                <h3 class="timeline-card-title">初遇</h3>
+                <p class="timeline-card-text">老周巡线经过旧仓村外的山坡，第一次注意到那个蹲在花生地边上的男孩。林远指着塔顶，问他那个红色的灯是干什么用的。</p>
+                <div class="timeline-card-icon"><i class="fas fa-bolt"></i></div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-year="2019" data-index="1">
+            <div class="timeline-dot"><span>2019</span></div>
+            <div class="timeline-card">
+                <div class="timeline-card-year">2019 · 秋</div>
+                <h3 class="timeline-card-title">塔下的秘密</h3>
+                <p class="timeline-card-text">林远坐在第九基塔下面，手里拿着父亲寄来的旧手机。他问老周，电有没有可能送到深圳。那灯闪的时候，爸爸能不能看见。</p>
+                <div class="timeline-card-icon"><i class="fas fa-mobile-alt"></i></div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-year="2021" data-index="2">
+            <div class="timeline-dot"><span>2021</span></div>
+            <div class="timeline-card">
+                <div class="timeline-card-year">2021 · 春</div>
+                <h3 class="timeline-card-title">变化</h3>
+                <p class="timeline-card-text">林远考上县里的高中，村子开始变化。水泥路、太阳能路灯、柑橘采摘园。林远的父亲也回来了。</p>
+                <div class="timeline-card-icon"><i class="fas fa-seedling"></i></div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-year="2025" data-index="3">
+            <div class="timeline-dot"><span>2025</span></div>
+            <div class="timeline-card">
+                <div class="timeline-card-year">2025 · 冬</div>
+                <h3 class="timeline-card-title">归来</h3>
+                <p class="timeline-card-text">林远大学毕业回到旧仓村，学的是电气工程。两个人站在塔下面，风从海那边吹过来，导线发出细微的啸声。</p>
+                <div class="timeline-card-icon"><i class="fas fa-user-graduate"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 区段3：视觉小说 ===== -->
+<section class="section section-novel" id="novel">
+    <div class="section-header">
+        <h2 class="section-title reveal-up">阅读故事</h2>
+        <p class="section-desc reveal-up" data-delay="200">点击屏幕推进对话，沉浸体验这段跨越八年的守望</p>
+    </div>
+    <div class="tv-frame" id="tv-frame">
+        <div class="tv-screen" id="tv-screen">
+            <div class="screen-content">
+                <div class="scene-background" id="scene-bg"></div>
+                <div class="chapter-display" id="chapter-display">
+                    <div class="chapter-title" id="chapter-title"></div>
+                    <div class="chapter-description" id="chapter-description"></div>
+                    <div class="chapter-year" id="chapter-year"></div>
+                    <div class="chapter-progress">第<span id="chapter-current">1</span>章 / 共<span id="chapter-total">6</span>章</div>
+                    <div class="chapter-continue">点击屏幕继续</div>
+                </div>
+                <div class="dialogue-box">
+                    <div class="speaker" id="speaker">老周</div>
+                    <div class="text" id="dialogue-text">2017年，老周第一次注意到那个孩子，是在七月。</div>
+                    <div class="next-indicator"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="character" id="character-left">
+                    <img src="" alt="角色左" id="char-left-img">
+                </div>
+                <div class="character" id="character-right">
+                    <img src="" alt="角色右" id="char-right-img">
+                </div>
+                <div class="interactive-element" id="tower">
+                    <div class="tower-body"></div>
+                    <div class="tower-light"></div>
+                </div>
+                <div class="game-overlay" id="game-overlay">
+                    <div class="game-container" id="game-container"></div>
+                    <div class="game-controls" id="game-controls">
+                        <button class="game-btn" id="game-skip-btn">跳过游戏</button>
+                        <button class="game-btn" id="game-restart-btn">重新开始</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cover-screen" id="cover-screen">
+                <div class="cover-content">
+                    <div class="cover-title">
+                        <span class="cover-char">我</span>
+                        <span class="cover-char">们</span>
+                        <span class="cover-char">之</span>
+                        <span class="cover-char">间</span>
+                    </div>
+                    <div class="cover-subtitle">— 像素视觉小说 —</div>
+                    <div class="cover-line"></div>
+                    <div class="cover-story">一段关于输电塔与守望的故事</div>
+                    <div class="cover-start">点击屏幕开始</div>
+                </div>
+            </div>
+        </div>
+        <div class="tv-controls">
+            <div class="control-row">
+                <button class="tv-button power" id="power-btn">
+                    <span class="button-icon"><i class="fas fa-power-off"></i></span>
+                    <span class="button-label">电源</span>
+                </button>
+                <button class="tv-button" id="next-scene-btn">
+                    <span class="button-icon"><i class="fas fa-forward"></i></span>
+                    <span class="button-label">下一幕</span>
+                </button>
+                <button class="tv-button" id="prev-scene-btn">
+                    <span class="button-icon"><i class="fas fa-backward"></i></span>
+                    <span class="button-label">上一幕</span>
+                </button>
+                <button class="tv-button" id="auto-btn">
+                    <span class="button-icon"><i class="fas fa-play"></i></span>
+                    <span class="button-label">自动</span>
+                </button>
+                <button class="tv-button" id="menu-btn">
+                    <span class="button-icon"><i class="fas fa-bars"></i></span>
+                    <span class="button-label">菜单</span>
+                </button>
+            </div>
+        </div>
+        <div class="tv-stand"></div>
+    </div>
+</section>
+
+<!-- ===== 区段4：瞬间 Gallery ===== -->
+<section class="section section-gallery" id="gallery">
+    <div class="section-header">
+        <h2 class="section-title reveal-up">故事瞬间</h2>
+        <p class="section-desc reveal-up" data-delay="200">点击卡片，重温那些留在铁塔下的记忆</p>
+    </div>
+    <div class="gallery-grid">
+        <div class="gallery-card" data-quote="航空警示灯。飞机看得见，不会撞上。">
+            <div class="gallery-card-bg" style="background-image:url('images/hillside.png')"></div>
+            <div class="gallery-card-overlay"></div>
+            <div class="gallery-card-content">
+                <div class="gallery-card-label">第一章 · 初遇</div>
+                <h3 class="gallery-card-title">那个红色的灯</h3>
+                <p class="gallery-card-text">"塔上那个，那个红色的灯，晚上会闪的，是干什么用的？"</p>
+            </div>
+            <div class="gallery-card-icon"><i class="fas fa-lightbulb"></i></div>
+        </div>
+        <div class="gallery-card" data-quote="有可能。">
+            <div class="gallery-card-bg" style="background-image:url('images/sunset.png')"></div>
+            <div class="gallery-card-overlay"></div>
+            <div class="gallery-card-content">
+                <div class="gallery-card-label">第三章 · 塔下的秘密</div>
+                <h3 class="gallery-card-title">有没有可能送到深圳</h3>
+                <p class="gallery-card-text">"有没有可能送到深圳？" — 林远看着塔顶，银白色的塔材在夕光里泛着暖色。</p>
+            </div>
+            <div class="gallery-card-icon"><i class="fas fa-plug"></i></div>
+        </div>
+        <div class="gallery-card" data-quote="塔是送电的，不是送话的。">
+            <div class="gallery-card-bg" style="background-image:url('images/towerbase.png')"></div>
+            <div class="gallery-card-overlay"></div>
+            <div class="gallery-card-content">
+                <div class="gallery-card-label">第四章 · 线路工的故事</div>
+                <h3 class="gallery-card-title">能送到与送不到</h3>
+                <p class="gallery-card-text">塔是送电的，不是送话的。有些东西，能送到，有些东西，送不到。</p>
+            </div>
+            <div class="gallery-card-icon"><i class="fas fa-phone-alt"></i></div>
+        </div>
+        <div class="gallery-card" data-quote="我觉得它不是把人送走的。是把人叫回来的。">
+            <div class="gallery-card-bg" style="background-image:url('images/night.png')"></div>
+            <div class="gallery-card-overlay"></div>
+            <div class="gallery-card-content">
+                <div class="gallery-card-label">第六章 · 归来</div>
+                <h3 class="gallery-card-title">把人叫回来的</h3>
+                <p class="gallery-card-text">"现在，我觉得它不是把人送走的。是把人叫回来的。"</p>
+            </div>
+            <div class="gallery-card-icon"><i class="fas fa-home"></i></div>
+        </div>
+    </div>
+    <!-- 语录弹出层 -->
+    <div class="quote-overlay" id="quote-overlay">
+        <div class="quote-box">
+            <div class="quote-close" id="quote-close"><i class="fas fa-times"></i></div>
+            <div class="quote-mark">"</div>
+            <p class="quote-text" id="quote-text"></p>
+            <div class="quote-mark-end">"</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 区段5：终章 ===== -->
+<section class="section section-ending" id="ending">
+    <div class="ending-bg"></div>
+    <div class="ending-content">
+        <div class="ending-tower-art">
+            <div class="ending-tower-line"></div>
+            <div class="ending-tower-light"></div>
+        </div>
+        <blockquote class="ending-quote reveal-up">
+            风还在吹。远处的海面上，落日把铁塔的影子投在橘子林里，和六年前投在花生地上的影子，一模一样。
+        </blockquote>
+        <div class="ending-divider reveal-up" data-delay="300"></div>
+        <p class="ending-author reveal-up" data-delay="500">《我们之间》</p>
+        <p class="ending-meta reveal-up" data-delay="700">交互叙事作品 · 像素风视觉小说</p>
+        <div class="ending-actions reveal-up" data-delay="900">
+            <a href="#novel" class="ending-btn"><i class="fas fa-book-open"></i> 重新阅读</a>
+            <a href="#hero" class="ending-btn ending-btn-secondary"><i class="fas fa-arrow-up"></i> 回到顶部</a>
+        </div>
+    </div>
+    <div class="ending-particles" id="ending-particles"></div>
+</section>
+
+<!-- ===== 设置菜单 ===== -->
+<div class="menu-overlay" id="menu-overlay">
+    <div class="menu-content">
+        <h2><i class="fas fa-cog"></i> 设置</h2>
+        <div class="menu-section">
+            <h3>文本速度</h3>
+            <input type="range" id="text-speed" min="1" max="10" value="5">
+        </div>
+        <div class="menu-section">
+            <h3>自动播放间隔</h3>
+            <input type="range" id="auto-speed" min="1" max="10" value="3">
+        </div>
+        <div class="menu-section voice-setting">
+            <h3>角色配音</h3>
+            <label class="toggle-switch">
+                <input type="checkbox" id="voice-toggle" checked>
+                <span class="toggle-slider"></span>
+                <span class="toggle-label" id="voice-toggle-label">开启</span>
+            </label>
+        </div>
+        <div class="menu-section">
+            <button id="fullscreen-btn"><i class="fas fa-expand"></i> 全屏</button>
+            <button id="reset-btn"><i class="fas fa-redo"></i> 重置进度</button>
+        </div>
+        <button class="close-menu" id="close-menu"><i class="fas fa-times"></i> 关闭</button>
+    </div>
+</div>
+
+<!-- ===== 点击涟漪效果 ===== -->
+<div class="click-ripple" id="click-ripple"></div>
+
+<!-- ===== 音频元素 ===== -->
+<audio id="bgm-xiangcun" src="sound/BGM/乡村.mp3" loop preload="auto"></audio>
+<audio id="bgm-guilai" src="sound/BGM/归来.mp3" loop preload="auto"></audio>
+<audio id="voice-audio" preload="auto"></audio>
+
+<!-- ===== BGM浮动按钮 ===== -->
+<button class="bgm-toggle-btn" id="bgm-toggle-btn" title="背景音乐开关">
+    <i class="fas fa-music" id="bgm-icon"></i>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
