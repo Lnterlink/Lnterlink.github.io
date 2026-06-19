@@ -318,6 +318,16 @@
                 <span class="toggle-label" id="voice-toggle-label">开启</span>
             </label>
         </div>
+        <div class="menu-section volume-setting">
+            <h3>角色音量</h3>
+            <input type="range" id="voice-volume" min="0" max="100" value="100">
+            <span class="volume-value" id="voice-volume-value">100%</span>
+        </div>
+        <div class="menu-section volume-setting">
+            <h3>背景音乐音量</h3>
+            <input type="range" id="bgm-volume" min="0" max="100" value="10">
+            <span class="volume-value" id="bgm-volume-value">10%</span>
+        </div>
         <div class="menu-section">
             <button id="fullscreen-btn"><i class="fas fa-expand"></i> 全屏</button>
             <button id="reset-btn"><i class="fas fa-redo"></i> 重置进度</button>
@@ -338,6 +348,26 @@
 <button class="bgm-toggle-btn" id="bgm-toggle-btn" title="背景音乐开关">
     <i class="fas fa-music" id="bgm-icon"></i>
 </button>
+
+<!-- ===== 手机端横屏按钮 ===== -->
+<button class="landscape-btn" id="landscape-btn" title="全屏横屏">
+    <i class="fas fa-expand"></i>
+    <span class="landscape-btn-label">横屏</span>
+</button>
+
+<!-- ===== 竖屏提示遮罩 ===== -->
+<div class="portrait-overlay" id="portrait-overlay">
+    <div class="portrait-overlay-inner">
+        <div class="portrait-icon">
+            <i class="fas fa-mobile-screen"></i>
+        </div>
+        <p class="portrait-text">请旋转手机至横屏</p>
+        <p class="portrait-sub">以获得最佳阅读体验</p>
+        <button class="portrait-force-btn" id="portrait-force-btn">
+            <i class="fas fa-expand"></i> 强制全屏横屏
+        </button>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>

@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
         bgmEnabled: true,
         voiceEnabled: true,
         currentBGM: null,
-        bgmVolume: 0.35,
+        bgmVolume: 0.10,
+        voiceVolume: 1.0,
         fadeDuration: 2000,
         voiceAudio: null,
         bgmXiangcun: null,
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.voiceAudio = document.getElementById('voice-audio');
             if (this.bgmXiangcun) this.bgmXiangcun.volume = 0;
             if (this.bgmGuilai) this.bgmGuilai.volume = 0;
+            if (this.voiceAudio) this.voiceAudio.volume = this.voiceVolume;
         },
 
         _pad3(n) {
@@ -152,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!dir) return;
             const path = 'sound/Voice/' + dir + '/scene_' + this._pad3(sceneId) + '.wav';
             this.voiceAudio.src = path;
+            this.voiceAudio.volume = this.voiceVolume;
             this.voiceAudio.play().catch(() => {});
         },
 
@@ -169,6 +172,20 @@ document.addEventListener('DOMContentLoaded', function () {
         setVoiceEnabled(on) {
             this.voiceEnabled = on;
             if (!on) this.stopVoice();
+        },
+
+        setBGMVolume(vol) {
+            this.bgmVolume = Math.max(0, Math.min(1, vol));
+            if (this.currentBGM) {
+                this.currentBGM.volume = this.bgmEnabled ? this.bgmVolume : 0;
+            }
+        },
+
+        setVoiceVolume(vol) {
+            this.voiceVolume = Math.max(0, Math.min(1, vol));
+            if (this.voiceAudio) {
+                this.voiceAudio.volume = this.voiceVolume;
+            }
         }
     };
 
@@ -657,6 +674,27 @@ document.addEventListener('DOMContentLoaded', function () {
         voiceToggle.addEventListener('change', function() {
             AudioManager.setVoiceEnabled(this.checked);
             if (voiceToggleLabel) voiceToggleLabel.textContent = this.checked ? '开启' : '关闭';
+        });
+    }
+
+    // 音量滑块
+    const voiceVolumeSlider = document.getElementById('voice-volume');
+    const voiceVolumeValue = document.getElementById('voice-volume-value');
+    if (voiceVolumeSlider) {
+        voiceVolumeSlider.addEventListener('input', function() {
+            const vol = this.value / 100;
+            AudioManager.setVoiceVolume(vol);
+            if (voiceVolumeValue) voiceVolumeValue.textContent = this.value + '%';
+        });
+    }
+
+    const bgmVolumeSlider = document.getElementById('bgm-volume');
+    const bgmVolumeValue = document.getElementById('bgm-volume-value');
+    if (bgmVolumeSlider) {
+        bgmVolumeSlider.addEventListener('input', function() {
+            const vol = this.value / 100;
+            AudioManager.setBGMVolume(vol);
+            if (bgmVolumeValue) bgmVolumeValue.textContent = this.value + '%';
         });
     }
 
@@ -1286,6 +1324,65 @@ document.addEventListener('DOMContentLoaded', function () {
         setupGallery();
         setupEndingParticles();
     }
+
+    // ===== 手机端横屏适配 =====
+    const portraitOverlay = document.getElementById('portrait-overlay');
+    const landscapeBtn = document.getElementById('landscape-btn');
+    const portraitForceBtn = document.getElementById('portrait-force-btn');
+
+    function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            || (window.innerWidth <= 768 && ('ontouchstart' in window));
+    }
+
+    function isPortrait() {
+        const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
+        return angle === 0 || angle === 180;
+    }
+
+    async function requestFullscreenLandscape() {
+        const el = document.documentElement;
+        try {
+            if (el.requestFullscreen) await el.requestFullscreen();
+            else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen();
+            else if (el.msRequestFullscreen) await el.msRequestFullscreen();
+        } catch (e) {}
+        try {
+            if (screen.orientation && screen.orientation.lock) {
+                await screen.orientation.lock('landscape');
+            }
+        } catch (e) {}
+    }
+
+    function updatePortraitOverlay() {
+        if (!isMobile()) {
+            if (portraitOverlay) portraitOverlay.classList.remove('active');
+            return;
+        }
+        if (isPortrait()) {
+            if (portraitOverlay) portraitOverlay.classList.add('active');
+        } else {
+            if (portraitOverlay) portraitOverlay.classList.remove('active');
+        }
+    }
+
+    if (landscapeBtn) {
+        landscapeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            requestFullscreenLandscape();
+        });
+    }
+
+    if (portraitForceBtn) {
+        portraitForceBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            requestFullscreenLandscape();
+        });
+    }
+
+    window.addEventListener('orientationchange', updatePortraitOverlay);
+    window.addEventListener('resize', updatePortraitOverlay);
+    updatePortraitOverlay();
 
     // 通知动画样式
     const notifStyle = document.createElement('style');

@@ -913,7 +913,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .text {
-    font-family: var(--font-pixel);
+    font-family: var(--font-body);
     font-size: 19px;
     line-height: 1.9;
     color: #f7ead0;
@@ -2706,6 +2706,185 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     font-size: 13px;
     color: var(--c-text-muted);
     letter-spacing: 0.08em;
+}
+
+/* 音量滑块 */
+.volume-setting {
+    position: relative;
+}
+
+.volume-setting input[type="range"] {
+    width: calc(100% - 50px);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.volume-value {
+    display: inline-block;
+    width: 42px;
+    text-align: right;
+    font-family: var(--font-pixel);
+    font-size: 12px;
+    color: var(--c-amber-light);
+    text-shadow: 2px 2px 0 #000;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+/* ===== 手机端横屏按钮 ===== */
+.landscape-btn {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 84px;
+    z-index: 998;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 3px solid #17100c;
+    outline: 2px solid rgba(216,154,74,0.58);
+    background: linear-gradient(180deg, #6d5b49 0%, #39302a 48%, #1b1816 49%, #111 100%);
+    color: #f3dfba;
+    font-family: var(--font-pixel);
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #090909, inset 0 2px 0 rgba(255,238,190,0.2);
+    transition: all 0.15s ease;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.landscape-btn-label {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    display: block;
+}
+
+.landscape-btn:hover {
+    background: linear-gradient(180deg, #8a6548 0%, #4f3828 48%, #261912 49%, #111 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #090909, inset 0 2px 0 rgba(255,238,190,0.25);
+}
+
+.landscape-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #090909, inset 0 2px 0 rgba(255,238,190,0.15);
+}
+
+/* ===== 竖屏提示遮罩 ===== */
+.portrait-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #0a0a0a;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+}
+
+.portrait-overlay.active {
+    display: flex;
+}
+
+.portrait-overlay-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: portraitFadeIn 0.5s ease;
+}
+
+@keyframes portraitFadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.portrait-icon {
+    font-size: 64px;
+    color: var(--c-amber);
+    animation: portraitRotateHint 2s ease-in-out infinite;
+    text-shadow: 0 0 24px rgba(216,154,74,0.4);
+}
+
+@keyframes portraitRotateHint {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-90deg); }
+    50% { transform: rotate(-90deg); }
+    75% { transform: rotate(0deg); }
+}
+
+.portrait-text {
+    font-family: var(--font-pixel);
+    font-size: 20px;
+    color: var(--c-amber-light);
+    text-shadow: 2px 2px 0 #000;
+    letter-spacing: 0.1em;
+}
+
+.portrait-sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--c-text-muted);
+    margin-top: -8px;
+}
+
+.portrait-force-btn {
+    margin-top: 16px;
+    padding: 12px 24px;
+    border-radius: 3px;
+    border: 3px solid #17100c;
+    outline: 2px solid rgba(216,154,74,0.58);
+    background: linear-gradient(180deg, #6d5b49 0%, #39302a 48%, #1b1816 49%, #111 100%);
+    color: #f3dfba;
+    font-family: var(--font-pixel);
+    font-size: 13px;
+    cursor: pointer;
+    text-shadow: 2px 2px 0 #000;
+    box-shadow: 0 4px 0 #090909, inset 0 2px 0 rgba(255,238,190,0.2);
+    transition: all 0.15s ease;
+    letter-spacing: 0.08em;
+}
+
+.portrait-force-btn:hover {
+    background: linear-gradient(180deg, #8a6548 0%, #4f3828 48%, #261912 49%, #111 100%);
+    transform: translateY(-2px);
+}
+
+.portrait-force-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #090909;
+}
+
+/* 手机端才显示横屏按钮 */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+    .landscape-btn {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .landscape-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+        bottom: 16px;
+        right: 68px;
+    }
+    .landscape-btn-label {
+        font-size: 7px;
+    }
+    .portrait-text {
+        font-size: 16px;
+    }
+    .portrait-icon {
+        font-size: 48px;
+    }
 }
 
 /* BGM按钮响应式 */
