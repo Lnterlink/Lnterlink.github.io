@@ -1329,29 +1329,58 @@ document.addEventListener('DOMContentLoaded', function () {
     const portraitOverlay = document.getElementById('portrait-overlay');
     const landscapeBtn = document.getElementById('landscape-btn');
     const portraitForceBtn = document.getElementById('portrait-force-btn');
+    const portraitText = document.getElementById('portrait-text');
+    const portraitSub = document.getElementById('portrait-sub');
+    const portraitExit = document.getElementById('portrait-exit');
 
     function isMobile() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
             || (window.innerWidth <= 768 && ('ontouchstart' in window));
     }
 
+    function isWeixin() {
+        return /MicroMessenger/i.test(navigator.userAgent);
+    }
+
     function isPortrait() {
+        // 若启用了 CSS 强制横屏，一律视为横屏
+        if (document.body.classList.contains('css-force-landscape')) return false;
         const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation;
         return angle === 0 || angle === 180;
     }
 
+    function isOrientationLockSupported() {
+        return !!(screen.orientation && screen.orientation.lock);
+    }
+
     async function requestFullscreenLandscape() {
+        // 如果已经处于 CSS 强制横屏，点击则退出
+        if (document.body.classList.contains('css-force-landscape')) {
+            document.body.classList.remove('css-force-landscape');
+            updatePortraitOverlay();
+            return;
+        }
+
         const el = document.documentElement;
         try {
             if (el.requestFullscreen) await el.requestFullscreen();
             else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen();
             else if (el.msRequestFullscreen) await el.msRequestFullscreen();
         } catch (e) {}
+
+        let locked = false;
         try {
             if (screen.orientation && screen.orientation.lock) {
                 await screen.orientation.lock('landscape');
+                locked = true;
             }
         } catch (e) {}
+
+        // 标准 API 失败（如微信），退回到 CSS 旋转模拟横屏
+        if (!locked) {
+            document.body.classList.add('css-force-landscape');
+            updatePortraitOverlay();
+        }
     }
 
     function updatePortraitOverlay() {
@@ -1359,6 +1388,29 @@ document.addEventListener('DOMContentLoaded', function () {
             if (portraitOverlay) portraitOverlay.classList.remove('active');
             return;
         }
+
+        // 微信环境：调整提示文案
+        if (isWeixin() && portraitText && portraitSub) {
+            portraitText.textContent = '微信内请使用下方按钮进入横屏';
+            portraitSub.textContent = '以获得最佳阅读体验';
+        }
+
+        // 若启用了 CSS 强制横屏，隐藏遮罩并显示退出提示
+        if (document.body.classList.contains('css-force-landscape')) {
+            if (portraitOverlay) portraitOverlay.classList.remove('active');
+            if (portraitExit) portraitExit.style.display = 'block';
+            if (portraitForceBtn) {
+                portraitForceBtn.innerHTML = '<i class="fas fa-compress"></i> 退出横屏模式';
+            }
+            return;
+        }
+
+        // 未启用强制横屏时恢复按钮文字
+        if (portraitForceBtn) {
+            portraitForceBtn.innerHTML = '<i class="fas fa-expand"></i> 强制横屏模式';
+        }
+        if (portraitExit) portraitExit.style.display = 'none';
+
         if (isPortrait()) {
             if (portraitOverlay) portraitOverlay.classList.add('active');
         } else {

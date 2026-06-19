@@ -2582,9 +2582,48 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* 横屏移动端 */
 @media (orientation: landscape) and (max-height: 600px) {
-    .tv-screen { min-height: 260px; height: 70vh; }
+    .tv-screen { min-height: 200px; height: 72dvh; }
     .section-hero { min-height: auto; padding: 40px 24px; }
     .hero-char { font-size: 56px; }
+    .section { padding: 40px 20px; }
+
+    /* 游戏元素紧凑化 */
+    .game-overlay { justify-content: flex-start; padding-top: 4px; }
+    .game-container { overflow: auto; }
+    .tower-display { width: 56px; height: 140px; margin-bottom: 6px; }
+    .lamp-display { width: 20px; height: 20px; top: 8px; }
+    .game-instructions { font-size: 10px; margin-bottom: 4px; max-width: 92%; }
+    .game-controls { gap: 6px; margin-top: 4px; }
+    .game-btn, .game-complete-btn { padding: 5px 10px; font-size: 9px; }
+    .game-score, .game-timer { font-size: 11px; top: 4px; }
+    .game-score { left: 8px; }
+    .game-timer { right: 8px; }
+    .tower-inspection { width: 65%; height: 48%; margin-bottom: 4px; }
+    .tower-image { border-width: 2px; }
+    .wire-canvas { width: 78%; height: 48%; }
+    .wire-point { width: 22px; height: 22px; font-size: 8px; margin-left: -11px; margin-top: -11px; border-width: 2px; }
+    .defect, .change-spot { width: 20px; height: 20px; border-width: 2px; }
+    .defect-count, .change-count { top: 4px; left: 4px; font-size: 11px; }
+    .change-label { font-size: 11px; top: 2px; }
+    .game-complete { padding: 10px 8px; max-width: min(90vw, 280px); }
+    .game-complete h3 { font-size: 16px; margin-bottom: 6px; }
+    .game-complete p { font-size: 11px; margin-bottom: 6px; }
+    .game-feedback-img { max-width: 160px; margin-bottom: 6px; border-width: 2px; }
+    .game-feedback-img img { max-height: 80px; }
+    .game-complete-btn { font-size: 9px; padding: 6px 10px; }
+    .dialogue-box { width: 92%; bottom: 6px; padding: 8px 10px 10px; border-width: 2px; }
+    .text { font-size: 11px; line-height: 1.5; }
+    .speaker { font-size: 11px; margin-bottom: 2px; }
+    .character { width: 80px; height: 120px; bottom: 72px; }
+    .chapter-display { padding: 6px 10px; }
+    .chapter-title { font-size: 20px; }
+    .chapter-description { font-size: 11px; }
+    .tv-controls { padding: 0 4px; }
+    .control-row { gap: 3px; }
+    .tv-button { padding: 4px 6px; min-width: 42px; font-size: 8px; }
+    .button-icon { font-size: 11px; }
+    .button-label { font-size: 7px; }
+    .tv-frame { padding: 6px; border-width: 3px; }
 }
 
 /* 全屏样式 */
@@ -2906,4 +2945,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         bottom: 12px;
         right: 12px;
     }
+}
+
+/* ===== 微信/不支持 orientation.lock：CSS 旋转强制横屏 ===== */
+body.css-force-landscape {
+    position: fixed;
+    width: 100vh;
+    height: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    overflow: auto;
+}
+
+body.css-force-landscape .nav-bar,
+body.css-force-landscape .landscape-btn,
+body.css-force-landscape .bgm-toggle-btn,
+body.css-force-landscape .menu-overlay,
+body.css-force-landscape .mobile-menu,
+body.css-force-landscape .portrait-overlay,
+body.css-force-landscape .loading-screen,
+body.css-force-landscape .click-ripple {
+    position: absolute;
 }
