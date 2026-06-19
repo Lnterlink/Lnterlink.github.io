@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 target.currentTime = 0;
-                target.play().then(() => this._fadeIn(target)).catch(() => {});
+                return target.play().then(() => this._fadeIn(target)).catch(() => {});
             }
             this._updateBtn(true);
         },
@@ -190,17 +190,36 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // 页面首次交互时解锁音频
+    let audioUnlocked = false;
+    function unlockAudio() {
+        if (audioUnlocked) return;
+        if (AudioManager.bgmXiangcun) AudioManager.bgmXiangcun.load();
+        if (AudioManager.bgmGuilai) AudioManager.bgmGuilai.load();
+        const p = AudioManager.playBGM('xiangcun');
+        // play() 返回 Promise 时若成功播放即标记解锁
+        if (p && typeof p.then === 'function') {
+            p.then(() => { audioUnlocked = true; }).catch(() => { audioUnlocked = false; });
+        } else {
+            audioUnlocked = true;
+        }
+    }
+
     function initAudioOnInteraction() {
         AudioManager.init();
-        const unlock = () => {
-            if (AudioManager.bgmXiangcun) AudioManager.bgmXiangcun.load();
-            if (AudioManager.bgmGuilai) AudioManager.bgmGuilai.load();
-            AudioManager.playBGM('xiangcun');
-            document.removeEventListener('click', unlock);
-            document.removeEventListener('touchstart', unlock);
-        };
-        document.addEventListener('click', unlock, { once: true });
-        document.addEventListener('touchstart', unlock, { once: true });
+        // 任意用户手势解锁（click/touchstart）
+        const onGesture = () => { unlockAudio(); };
+        document.addEventListener('click', onGesture, { once: true });
+        document.addEventListener('touchstart', onGesture, { once: true });
+        // 微信 webview：WeixinJSBridge ready 后立即尝试解锁
+        if (typeof WeixinJSBridge === 'undefined') {
+            document.addEventListener('WeixinJSBridgeReady', unlockAudio, { once: true });
+        } else {
+            unlockAudio();
+        }
+        // 兜底：首次播放失败后，下一次手势再试一次
+        document.addEventListener('pointerdown', () => {
+            if (!audioUnlocked) unlockAudio();
+        }, { once: true });
     }
 
     // ===== 粒子系统 =====
@@ -214,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     resizeParticleCanvas();
     window.addEventListener('resize', resizeParticleCanvas);
+    window.addEventListener('orientationchange', () => setTimeout(resizeParticleCanvas, 250));
 
     class Particle {
         constructor() {
@@ -323,6 +343,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const clickRipple = document.getElementById('click-ripple');
 
     document.addEventListener('click', (e) => {
+        // CSS 旋转强制横屏模式下，坐标会随旋转错位，跳过装饰涟漪
+        if (document.body.classList.contains('css-force-landscape')) return;
         clickRipple.style.left = (e.clientX - 10) + 'px';
         clickRipple.style.top = (e.clientY - 10) + 'px';
         clickRipple.classList.remove('active');
@@ -540,6 +562,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let autoPlayInterval;
     let textSpeed = 5;
     let typewriterTimeout;
+    let currentTypingText = ''; // 当前正在打字的完整文本，用于点击快进
 
     // DOM
     const sceneBg = document.getElementById('scene-bg');
@@ -632,20 +655,41 @@ document.addEventListener('DOMContentLoaded', function () {
     menuBtn.addEventListener('click', () => { menuOverlay.style.display = 'flex'; stopAutoPlay(); });
     closeMenuBtn.addEventListener('click', closeMenu);
 
-    // 屏幕点击推进
-    document.addEventListener('click', function(e) {
+    // 屏幕点击推进（含打字机快进：打字进行中点击=补全文字，已打完=下一幕）
+    // 触摸设备用 pointerdown 触发以减少延迟；为避免 pointerdown 与随后合成的 click
+    // 双重触发导致一次点击跳两句，用时间戳去重：触摸 pointerdown 处理后记录时间，
+    // 紧随其后的 click 若在去重窗口内则忽略。鼠标点击无 pointerdown(touch) 前置，照常走 click。
+    let lastTouchTapAt = 0;
+    const TAP_DEDUP_MS = 400;
+
+    function handleScreenTap(e) {
         if (e.target.closest('#cover-screen')) return;
         if (e.target.closest('.game-overlay')) return;
         if (e.target.closest('.tv-button')) return;
         if (e.target.closest('.menu-content')) return;
         if (e.target.closest('.chapter-display')) return;
         if (e.target.closest('.bgm-toggle-btn')) return;
+        if (e.target.closest('.landscape-btn')) return;
+        if (e.target.closest('#tower')) return; // 点击塔触发闪灯，不推进剧情
         if (!isPoweredOn) return;
         if (e.target.closest('.tv-screen') || e.target.closest('.tv-frame')) {
             if (chapterDisplay.classList.contains('active')) return;
+            // 打字进行中：补全当前文字，不推进
+            if (isTyping()) { completeTyping(); return; }
             nextScene();
         }
+    }
+    document.addEventListener('click', function(e) {
+        // 去重：触摸已在 pointerdown 处理过，忽略其合成的 click
+        if (e.timeStamp - lastTouchTapAt < TAP_DEDUP_MS) return;
+        handleScreenTap(e);
     });
+    // 触摸设备：pointerdown 减少延迟，同样走快进逻辑
+    document.addEventListener('pointerdown', function(e) {
+        if (e.pointerType !== 'touch') return;
+        lastTouchTapAt = e.timeStamp;
+        handleScreenTap(e);
+    }, { passive: true });
 
     tower.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -802,6 +846,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function typewriterEffect(text) {
         if (typewriterTimeout) { clearTimeout(typewriterTimeout); typewriterTimeout = null; }
         const speed = 100 - (textSpeed * 10);
+        currentTypingText = text;
         dialogueTextEl.textContent = '';
         let i = 0;
         function type() {
@@ -814,6 +859,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         type();
+    }
+
+    // 打字机是否仍在输出（用于点击快进：进行中则补全文字而非推进）
+    function isTyping() {
+        return typewriterTimeout !== null;
+    }
+
+    // 立即补全当前打字文本，不推进剧情
+    function completeTyping() {
+        if (typewriterTimeout) {
+            clearTimeout(typewriterTimeout);
+            typewriterTimeout = null;
+            dialogueTextEl.textContent = currentTypingText;
+        }
     }
 
     function togglePower() {
@@ -941,6 +1000,19 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => notification.remove(), 3000);
     }
 
+    // 兼容 CSS 强制横屏的滚动：body 旋转后 scrollIntoView 方向错乱，手动算偏移
+    function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (document.body.classList.contains('css-force-landscape')) {
+            // 旋转模式下 body 宽=100vh，沿"横向"滚动到该区段
+            const top = el.offsetTop;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     // ===== 故事结局 =====
     function showEnding() {
         if (isAutoPlaying) stopAutoPlay();
@@ -972,14 +1044,14 @@ document.addEventListener('DOMContentLoaded', function () {
             currentSceneIndex = 0;
             updateScene();
             showNotification('重新开始故事');
-            document.getElementById('novel').scrollIntoView({ behavior: 'smooth' });
+            scrollToSection('novel');
         };
         document.getElementById('ending-top-btn').onclick = () => {
             gameOverlay.classList.remove('active');
             gameContainer.innerHTML = '';
             currentGame = null;
             gameState = {};
-            document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+            scrollToSection('hero');
         };
     }
 
@@ -1010,6 +1082,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function startGame(gameId) {
+        // 强制清理上一局残留的定时器，避免重玩/重入时多 timer 并行导致结果弹窗重复弹出
+        if (gameTimer) { clearInterval(gameTimer); gameTimer = null; }
+        if (gameState && gameState.flashInterval) { clearInterval(gameState.flashInterval); gameState.flashInterval = null; }
         currentGame = gameId;
         gameState = {};
         if (isAutoPlaying) stopAutoPlay();
@@ -1034,6 +1109,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function endGame(completed) {
         if (gameTimer) { clearInterval(gameTimer); gameTimer = null; }
+        if (gameState && gameState.flashInterval) { clearInterval(gameState.flashInterval); gameState.flashInterval = null; }
         if (completed) {
             const played = JSON.parse(localStorage.getItem('playedGames') || '[]');
             if (!played.includes(currentGame)) { played.push(currentGame); localStorage.setItem('playedGames', JSON.stringify(played)); }
@@ -1085,6 +1161,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showLampResult() {
+        // 幂等守卫：结果弹窗只追加一次，防止残留定时器重复触发
+        if (gameState.resultShown) return;
+        gameState.resultShown = true;
         const r = gameState.count;
         const msg = r >= 30 ? '太厉害了！' : r >= 20 ? '不错！' : r >= 10 ? '继续加油！' : '再试一次！';
         gameContainer.innerHTML += `<div class="game-complete"><div class="game-feedback-img"><img src="images/feedback_lamp_counting.png" alt="夜空下的输电塔" loading="lazy"></div><h3>游戏结束</h3><p>你数了 ${r} 下！<br>${msg}</p><button class="game-complete-btn js-continue-story">继续故事</button></div>`;
@@ -1127,6 +1206,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showInspectionResult() {
+        if (gameState.resultShown) return;
+        gameState.resultShown = true;
         gameContainer.innerHTML += `<div class="game-complete"><div class="game-feedback-img"><img src="images/feedback_inspection.png" alt="稳固的输电塔" loading="lazy"></div><h3>巡检完成</h3><p>你发现了所有 ${gameState.defects.length} 个问题！<br>电塔已全面检修完毕</p><button class="game-complete-btn js-continue-story">继续故事</button></div>`;
         bindContinueStoryButton();
     }
@@ -1214,6 +1295,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showWireResult() {
+        if (gameState.resultShown) return;
+        gameState.resultShown = true;
         gameContainer.innerHTML += `<div class="game-complete"><div class="game-feedback-img"><img src="images/feedback_wire_connection.png" alt="灯火通明的村庄" loading="lazy"></div><h3>线路连接成功</h3><p>电送到了！<br>村庄的每一扇窗户都亮起了温暖的灯光</p><button class="game-complete-btn js-continue-story">继续故事</button></div>`;
         bindContinueStoryButton();
     }
@@ -1258,6 +1341,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showChangeResult() {
+        if (gameState.resultShown) return;
+        gameState.resultShown = true;
         gameContainer.innerHTML += `<div class="game-complete"><div class="game-feedback-img"><img src="images/feedback_village_change.png" alt="繁荣的旧仓村" loading="lazy"></div><h3>变化发现完成</h3><p>你发现了所有 ${gameState.changes.length} 个变化！<br>村子正在变得越来越好</p><button class="game-complete-btn js-continue-story">继续故事</button></div>`;
         bindContinueStoryButton();
     }
@@ -1301,6 +1386,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showBoltResult() {
+        if (gameState.resultShown) return;
+        gameState.resultShown = true;
         gameContainer.innerHTML += `<div class="game-complete"><div class="game-feedback-img"><img src="images/feedback_bolt_correction.png" alt="手绘草图上的螺栓标注" loading="lazy"></div><h3>纠错完成</h3><p>第九基的螺栓规格写错了。<br>M24，不是M20。现在改过来了。</p><button class="game-complete-btn js-continue-story">继续故事</button></div>`;
         bindContinueStoryButton();
     }
@@ -1389,13 +1476,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // 微信环境：调整提示文案
-        if (isWeixin() && portraitText && portraitSub) {
-            portraitText.textContent = '微信内请使用下方按钮进入横屏';
-            portraitSub.textContent = '以获得最佳阅读体验';
-        }
-
-        // 若启用了 CSS 强制横屏，隐藏遮罩并显示退出提示
+        // 已进入 CSS 强制横屏模式：隐藏遮罩，让用户在横屏内容里操作
         if (document.body.classList.contains('css-force-landscape')) {
             if (portraitOverlay) portraitOverlay.classList.remove('active');
             if (portraitExit) portraitExit.style.display = 'block';
@@ -1405,17 +1486,13 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // 未启用强制横屏时恢复按钮文字
+        // 竖屏（或未进入横屏模式）：不阻断，直接展示内容。
+        // 遮罩仅作为"横屏模式"的可选入口，默认隐藏，不再强制弹出。
         if (portraitForceBtn) {
-            portraitForceBtn.innerHTML = '<i class="fas fa-expand"></i> 强制横屏模式';
+            portraitForceBtn.innerHTML = '<i class="fas fa-expand"></i> 进入横屏模式';
         }
         if (portraitExit) portraitExit.style.display = 'none';
-
-        if (isPortrait()) {
-            if (portraitOverlay) portraitOverlay.classList.add('active');
-        } else {
-            if (portraitOverlay) portraitOverlay.classList.remove('active');
-        }
+        if (portraitOverlay) portraitOverlay.classList.remove('active');
     }
 
     if (landscapeBtn) {

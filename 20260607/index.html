@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>我们之间 · 交互叙事作品</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animations.css">
@@ -355,16 +355,16 @@
     <span class="landscape-btn-label">横屏</span>
 </button>
 
-<!-- ===== 竖屏提示遮罩 ===== -->
+<!-- ===== 横屏模式提示遮罩（用户主动进入横屏时显示，不再阻断竖屏） ===== -->
 <div class="portrait-overlay" id="portrait-overlay">
     <div class="portrait-overlay-inner">
         <div class="portrait-icon">
             <i class="fas fa-mobile-screen"></i>
         </div>
-        <p class="portrait-text" id="portrait-text">请旋转手机至横屏</p>
-        <p class="portrait-sub" id="portrait-sub">以获得最佳阅读体验</p>
+        <p class="portrait-text" id="portrait-text">横屏体验更佳</p>
+        <p class="portrait-sub" id="portrait-sub">旋转手机至横屏，或使用下方按钮进入横屏模式</p>
         <button class="portrait-force-btn" id="portrait-force-btn">
-            <i class="fas fa-expand"></i> 强制横屏模式
+            <i class="fas fa-expand"></i> 进入横屏模式
         </button>
         <p class="portrait-exit" id="portrait-exit" style="display:none;margin-top:8px;font-size:12px;color:rgba(242,232,213,0.4);">再次点击按钮可退出横屏</p>
     </div>
