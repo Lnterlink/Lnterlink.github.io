@@ -1,0 +1,817 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Lnterlink的小屋 | Lnterlink的小屋</title><meta name="author" content="Lnterlink"><meta name="copyright" content="Lnterlink"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Lnterlink · 马德盛 — 作品集 &#x2F; REEL        :root{     --bg:#0E0E10;     --surface:#161619;     --surface-2:#1C1C21;     --line:#26262B;     --line-2:#33333A;     --text:#E8E8EA;     --text-2:#8A8A92;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lnterlink的小屋">
+<meta property="og:url" content="https://lnterlink.site/%E4%BD%9C%E5%93%81%E9%9B%86/index.html">
+<meta property="og:site_name" content="Lnterlink的小屋">
+<meta property="og:description" content="Lnterlink · 马德盛 — 作品集 &#x2F; REEL        :root{     --bg:#0E0E10;     --surface:#161619;     --surface-2:#1C1C21;     --line:#26262B;     --line-2:#33333A;     --text:#E8E8EA;     --text-2:#8A8A92;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lnterlink.site/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png">
+<meta property="article:published_time" content="2026-06-25T12:04:17.608Z">
+<meta property="article:modified_time" content="2026-06-25T12:01:53.019Z">
+<meta property="article:author" content="Lnterlink">
+<meta property="article:tag" content="关键词">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lnterlink.site/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lnterlink.site/%E4%BD%9C%E5%93%81%E9%9B%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Lnterlink的小屋',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Lnterlink的小屋</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title"></h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="container" id="article-container"><!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lnterlink · 马德盛 — 作品集 / REEL</title>
+<meta name="description" content="Lnterlink 马德盛的个人作品集。愿做一切美好的信使。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0E10;
+    --surface:#161619;
+    --surface-2:#1C1C21;
+    --line:#26262B;
+    --line-2:#33333A;
+    --text:#E8E8EA;
+    --text-2:#8A8A92;
+    --text-3:#55555C;
+    --accent:#FF6B35;
+    --accent-dim:rgba(255,107,53,.18);
+    --v1:#C9C9CE;
+    --v2:#8A8A92;
+    --v3:#6E6E76;
+    --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+    --sans:'Inter',system-ui,-apple-system,'PingFang SC','HarmonyOS Sans SC','Microsoft YaHei',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ---------- fixed chrome ---------- */
+  .chrome-top{
+    position:fixed;top:0;left:0;right:0;height:46px;z-index:50;
+    background:var(--bg);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;padding:0 18px;
+    font-family:var(--mono);font-size:11px;color:var(--text-2);
+    letter-spacing:.04em;
+  }
+  .chrome-top .brand{color:var(--text);font-weight:700;white-space:nowrap}
+  .chrome-top .brand b{color:var(--accent)}
+  .reel{flex:1;position:relative;height:18px;display:flex;align-items:center;gap:3px;overflow:hidden}
+  .reel .seg{height:10px;border-radius:1px;flex:1;background:var(--surface-2);position:relative}
+  .reel .seg.v1{background:var(--v1)}
+  .reel .seg.v2{background:var(--v2)}
+  .reel .seg.v3{background:var(--v3)}
+  .reel .seg.end{background:var(--line-2)}
+  .reel .playhead{
+    position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--accent);
+    left:0;box-shadow:0 0 10px rgba(255,107,53,.6);
+  }
+  .reel .playhead::before{
+    content:"";position:absolute;top:-5px;left:-4px;width:0;height:0;
+    border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--accent);
+  }
+  .tc-global{white-space:nowrap;color:var(--text)}
+  .tc-global i{color:var(--text-3);font-style:normal}
+
+  .chrome-left{
+    position:fixed;left:18px;bottom:22px;z-index:50;
+    font-family:var(--mono);font-size:11px;color:var(--text-2);
+    display:flex;flex-direction:column;gap:6px;pointer-events:none;
+    max-width:46vw;
+  }
+  .chrome-left .now-tag{display:flex;align-items:center;gap:8px}
+  .chrome-left .now-tag .tk{
+    display:inline-block;padding:2px 6px;border:1px solid var(--line-2);border-radius:2px;
+    color:var(--text);font-weight:700;font-size:10px;
+  }
+  .chrome-left .now-name{color:var(--text);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.01em}
+  .chrome-left .now-rec{display:flex;align-items:center;gap:6px;color:var(--text-3)}
+  .chrome-left .now-rec .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 1.4s steps(2) infinite}
+  @keyframes blink{50%{opacity:.25}}
+
+  /* ---------- stage ---------- */
+  .stage{padding-top:46px}
+
+  section.clip{
+    position:relative;min-height:100vh;padding:120px 8vw 140px;
+    border-bottom:1px solid var(--line);
+    perspective:1100px;
+  }
+  .clip-rail{
+    position:relative;z-index:3;
+    display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;color:var(--text-2);letter-spacing:.06em;
+    padding-bottom:14px;border-bottom:1px solid var(--line);
+    margin-bottom:60px;max-width:1100px;
+  }
+  .clip-rail .tk{
+    color:var(--text);font-weight:700;border:1px solid var(--line-2);padding:2px 7px;border-radius:2px;
+  }
+  .clip-rail .ttl{color:var(--text);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:none}
+  .clip-rail .tc{color:var(--text-3)}
+  .clip-rail .dur{margin-left:auto;color:var(--accent)}
+
+  .layer-back{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .layer-back .big-num{
+    position:absolute;right:-2vw;top:8vh;font-family:var(--mono);font-weight:700;
+    font-size:34vw;line-height:1;color:#17171B;letter-spacing:-.04em;user-select:none;
+  }
+  .clip-inner{position:relative;z-index:2;max-width:1100px;will-change:transform}
+  .clip-body{position:relative}
+
+  .clip h2{
+    font-family:var(--sans);font-weight:800;font-size:clamp(30px,5vw,64px);
+    line-height:1.04;letter-spacing:-.02em;color:var(--text);max-width:16ch;
+  }
+  .clip .lede{margin-top:18px;font-size:clamp(15px,1.5vw,19px);color:var(--text-2);max-width:54ch;line-height:1.6}
+  .clip .links{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--mono);font-size:12px;color:var(--text-2)}
+  .clip .links a{border-bottom:1px solid var(--line-2);padding-bottom:2px;transition:border-color .2s}
+  .clip .links a:hover{border-color:var(--accent);color:var(--text)}
+
+  .frame{position:relative;border:1px solid var(--line);overflow:hidden;background:var(--surface)}
+  .frame::before,.frame::after{
+    content:"";position:absolute;top:0;bottom:0;width:14px;
+    background:repeating-linear-gradient(to bottom,var(--line-2) 0 2px,transparent 2px 9px);
+    opacity:.5;
+  }
+  .frame::before{left:0}.frame::after{right:0}
+  .frame .io{position:absolute;font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em;opacity:.8}
+  .frame .io.in{top:10px;left:22px}
+  .frame .io.out{bottom:10px;right:22px}
+  .frame img{width:100%;height:auto;display:block;filter:saturate(.9) contrast(1.02)}
+
+  .video{position:relative;width:100%;padding-top:56.25%;background:var(--surface);border:1px solid var(--line)}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video .io{position:absolute;font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em;z-index:2;text-shadow:0 0 6px rgba(0,0,0,.8)}
+  .video .io.in{top:10px;left:18px}
+  .video .io.out{bottom:10px;right:18px}
+
+  .h5-card{display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:center}
+  .h5-card .cover{position:relative;border:1px solid var(--line);overflow:hidden;background:var(--surface)}
+  .h5-card .cover img{width:100%;height:auto}
+  .h5-card .award{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent-dim);padding:4px 10px;border-radius:2px}
+  @media (max-width:720px){.h5-card{grid-template-columns:1fr}}
+
+  /* ---------- hero (cold open) ---------- */
+  .hero{
+    position:relative;min-height:100vh;padding:0 8vw;display:flex;flex-direction:column;justify-content:center;
+    border-bottom:1px solid var(--line);overflow:hidden;perspective:1100px;
+  }
+  .hero .rec{
+    position:absolute;top:64px;left:8vw;display:flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:12px;color:var(--text-2);letter-spacing:.1em;
+  }
+  .hero .rec .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);animation:blink 1.4s steps(2) infinite;box-shadow:0 0 10px rgba(255,107,53,.7)}
+  .hero .rec .tc{color:var(--text)}
+  .hero-inner{position:relative;z-index:2}
+  .hero .kicker{font-family:var(--mono);font-size:12px;color:var(--text-3);letter-spacing:.2em;margin-bottom:26px}
+  .hero h1{font-family:var(--sans);font-weight:800;font-size:clamp(56px,13vw,180px);line-height:.92;letter-spacing:-.03em;color:var(--text)}
+  .hero h1 .sub{display:block;font-size:clamp(18px,2.6vw,34px);font-weight:500;color:var(--text-2);letter-spacing:.04em;margin-top:22px}
+  .hero .credo{margin-top:38px;font-size:clamp(15px,1.6vw,20px);color:var(--text-2);max-width:40ch;line-height:1.6}
+  .hero .credo b{color:var(--text);font-weight:600}
+  .hero .zero{position:absolute;left:8vw;right:8vw;bottom:84px;height:1px;background:var(--line-2)}
+  .hero .zero::before{content:"";position:absolute;left:0;top:-4px;width:2px;height:9px;background:var(--accent)}
+  .hero .scroll-hint{position:absolute;left:8vw;bottom:40px;font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;display:flex;align-items:center;gap:10px}
+  .hero .scroll-hint .ar{display:inline-block;animation:nudge 1.8s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+  /* ---------- end ---------- */
+  .end{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:90vh}
+  .end .line{font-family:var(--sans);font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.3;color:var(--text);max-width:20ch;letter-spacing:-.01em}
+  .end .eor{margin-top:60px;font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:.2em;display:flex;gap:18px;align-items:center}
+  .end .eor .bar{width:40px;height:1px;background:var(--line-2)}
+
+  /* ---------- reduced motion / mobile flatten ---------- */
+  body.reduce section.clip,body.reduce .hero{perspective:none}
+  body.reduce .layer-back .big-num{opacity:.5}
+  body.is-mobile .chrome-left{display:none}
+
+  /* prevent iframe 3d issues */
+  .video,.video iframe{transform:translateZ(0)}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP CHROME: reel overview + global playhead + TC ===== -->
+<div class="chrome-top" aria-hidden="true">
+  <span class="brand">Lnterlink · <b>REEL</b></span>
+  <div class="reel" id="reel">
+    <div class="seg v1" data-name="COLD OPEN · 马德盛"></div>
+    <div class="seg v1" data-name="摄影 · 2023年秋至今"></div>
+    <div class="seg v1" data-name="图片设计 · 新春贺帖"></div>
+    <div class="seg v2" data-name="短片 · 风筝线的另一头"></div>
+    <div class="seg v2" data-name="短片 · 长河星光——顾宪成"></div>
+    <div class="seg v2" data-name="短片 · 回忆火车"></div>
+    <div class="seg v2" data-name="短片 · 清澈"></div>
+    <div class="seg v2" data-name="短片 · 路边野餐 预告片剪辑"></div>
+    <div class="seg v2" data-name="短片 · 北京南站节前采访"></div>
+    <div class="seg v3" data-name="H5 · 波斯毯 千年谈"></div>
+    <div class="seg v3" data-name="H5 · 献给阿尔吉侬的花束"></div>
+    <div class="seg end" data-name="END · 试错轨迹"></div>
+    <div class="playhead" id="playhead"></div>
+  </div>
+  <span class="tc-global"><span id="tcNow">00:00:00</span> <i>/ 00:02:00:00</i></span>
+</div>
+
+<!-- ===== LEFT CHROME: you-are-here monitor ===== -->
+<div class="chrome-left" aria-hidden="true">
+  <div class="now-tag"><span class="tk" id="nowTk">V1</span><span class="now-name" id="nowName">COLD OPEN · 马德盛</span></div>
+  <div class="now-rec"><span class="dot"></span> REC · <span id="nowTc">00:00:00</span></div>
+</div>
+
+<!-- ===== STAGE ===== -->
+<main class="stage" id="stage">
+
+  <!-- 0 · COLD OPEN -->
+  <section class="hero clip" data-track="V1" data-name="COLD OPEN · 马德盛">
+    <div class="rec"><span class="dot"></span> REC · <span class="tc">00:00:00</span></div>
+    <div class="hero-inner layer-mid">
+      <div class="kicker">个人作品集 / PERSONAL REEL · 2023—2026</div>
+      <h1>Lnterlink<span class="sub">马德盛 · 愿做一切美好的信使</span></h1>
+      <p class="credo">这里是我的作品集，<br>也是我的<b>试错轨迹</b>。</p>
+    </div>
+    <div class="zero"></div>
+    <div class="scroll-hint">SCROLL TO ENTER THE REEL <span class="ar">↓</span></div>
+  </section>
+
+  <!-- 1 · 摄影 -->
+  <section class="clip" data-track="V1" data-name="摄影 · 2023年秋至今">
+    <div class="clip-rail">
+      <span class="tk">V1</span><span class="ttl">摄影 · 2023年秋至今</span>
+      <span class="tc">00:00:08 — 00:00:14</span><span class="dur">DUR 06:00</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">01</span></div>
+      <div class="clip-inner">
+        <h2>在城市与田野中寻找希望。</h2>
+        <p class="lede">一组贯穿 2023 秋至 2024 夏的纪实摄影：在城市与田野之间，寻找那些仍然值得被看见的瞬间。</p>
+        <div class="frame" style="margin-top:42px">
+          <span class="io in">[ IN 00:00:08</span>
+          <img src="assets/2023年秋.jpg" alt="2023年秋—2024年夏 摄影" loading="lazy" />
+          <span class="io out">OUT 00:00:14 ]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · 图片设计 -->
+  <section class="clip" data-track="V1" data-name="图片设计 · 新春贺帖">
+    <div class="clip-rail">
+      <span class="tk">V1</span><span class="ttl">图片设计 · 新春定制贺帖</span>
+      <span class="tc">00:00:14 — 00:00:19</span><span class="dur">DUR 04:16</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">02</span></div>
+      <div class="clip-inner">
+        <h2>为新年传递一份祝意。</h2>
+        <p class="lede">参与学院联合中新网、《党建》杂志等平台的新年春节定制贺帖项目，在中新网、福州文旅局微博等平台展示。</p>
+        <div class="frame" style="margin-top:36px;max-width:560px">
+          <img src="assets/新春海报.jpg" alt="新春贺帖" loading="lazy" />
+        </div>
+        <div class="links">
+          <a href="https://mp.weixin.qq.com/s/UtmlfMHRIVNuxKPfM8GOjw" target="_blank" rel="noopener">中新网 ↗</a>
+          <a href="https://mp.weixin.qq.com/s/-Ux31s87XlLkdPu15yLo7A" target="_blank" rel="noopener">《党建》杂志 ↗</a>
+          <a href="https://m.weibo.cn/status/5128113320888270" target="_blank" rel="noopener">福州文旅局微博 ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · 短片 风筝线 -->
+  <section class="clip" data-track="V2" data-name="短片 · 风筝线的另一头">
+    <div class="clip-rail">
+      <span class="tk">V2</span><span class="ttl">短片 · 风筝线的另一头</span>
+      <span class="tc">00:00:22 — 00:00:30</span><span class="dur">DUR 07:16</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">03</span></div>
+      <div class="clip-inner">
+        <h2>新媒体向 · 脚本 / 拍摄 / 剪辑 / 动画</h2>
+        <p class="lede">《风筝线的另一头》——一次完整的自编自拍自剪自效的短片创作。</p>
+        <div class="video" style="margin-top:36px">
+          <span class="io in">[ IN</span><span class="io out">OUT ]</span>
+          <iframe loading="lazy" class="bilibili-iframe" <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1dKdGBAE7J&autoplay=0" allowfullscreen loading="lazy" title="风筝线的另一头"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · 短片 长河星光 -->
+  <section class="clip" data-track="V2" data-name="短片 · 长河星光——顾宪成">
+    <div class="clip-rail">
+      <span class="tk">V2</span><span class="ttl">短片 · 长河星光——顾宪成</span>
+      <span class="tc">00:00:30 — 00:00:38</span><span class="dur">DUR 07:12</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">04</span></div>
+      <div class="clip-inner">
+        <h2>新媒体向 · 登陆学习强国</h2>
+        <p class="lede">《长河星光——顾宪成》——新媒体向人物短片，登陆学习强国平台。</p>
+        <div class="video" style="margin-top:36px">
+          <span class="io in">[ IN</span><span class="io out">OUT ]</span>
+          <iframe loading="lazy" class="bilibili-iframe" <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1oKdGBAEFW&autoplay=0" allowfullscreen loading="lazy" title="长河星光——顾宪成"></iframe>
+        </div>
+        <div class="links">
+          <a href="https://www.xuexi.cn/lgpage/detail/index.html?id=5744881274945561275&item_id=5744881274945561275" target="_blank" rel="noopener">学习强国浏览 ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · 短片 回忆火车 -->
+  <section class="clip" data-track="V2" data-name="短片 · 回忆火车">
+    <div class="clip-rail">
+      <span class="tk">V2</span><span class="ttl">短片 · 回忆火车</span>
+      <span class="tc">00:00:38 — 00:00:46</span><span class="dur">DUR 07:12</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">05</span></div>
+      <div class="clip-inner">
+        <h2>纪实向 · 回忆火车</h2>
+        <p class="lede">纪实向短片创作：把一段正在远去的记忆，留在该在的地方。</p>
+        <div class="video" style="margin-top:36px">
+          <span class="io in">[ IN</span><span class="io out">OUT ]</span>
+          <iframe loading="lazy" class="bilibili-iframe" <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1LKdGBAE2A&autoplay=0" allowfullscreen loading="lazy" title="回忆火车"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · 短片 清澈 -->
+  <section class="clip" data-track="V2" data-name="短片 · 清澈">
+    <div class="clip-rail">
+      <span class="tk">V2</span><span class="ttl">短片 · 清澈</span>
+      <span class="tc">00:00:46 — 00:00:54</span><span class="dur">DUR 07:12</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">06</span></div>
+      <div class="clip-inner">
+        <h2>纪实向 · 清澈</h2>
+        <p class="lede">纪实向短片创作：清澈不是一种水质，是一种立场。</p>
+        <div class="video" style="margin-top:36px">
+          <span class="io in">[ IN</span><span class="io out">OUT ]</span>
+          <iframe loading="lazy" class="bilibili-iframe" <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1hYd3BREZF&autoplay=0" allowfullscreen loading="lazy" title="清澈"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · 短片 路边野餐预告片 -->
+  <section class="clip" data-track="V2" data-name="短片 · 路边野餐 预告片剪辑">
+    <div class="clip-rail">
+      <span class="tk">V2</span><span class="ttl">短片 · 《路边野餐》预告片剪辑</span>
+      <span class="tc">00:00:54 — 00:01:02</span><span class="dur">DUR 07:12</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">07</span></div>
+      <div class="clip-inner">
+        <h2>预告片剪辑 · 路边野餐</h2>
+        <p class="lede">《路边野餐》预告片剪辑练习——三幕式结构、冷开场与彩蛋的实战拆解。</p>
+        <div class="video" style="margin-top:36px">
+          <span class="io in">[ IN</span><span class="io out">OUT ]</span>
+          <iframe loading="lazy" class="bilibili-iframe" <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114635411819437&bvid=BV1iNTTzmEGQ&cid=30349592203&p=1&autoplay=0" allowfullscreen loading="lazy" title="路边野餐 预告片"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · 短片 北京南站采访 -->
+  <section class="clip" data-track="V2" data-name="短片 · 北京南站节前采访">
+    <div class="clip-rail">
+      <span class="tk">V2</span><span class="ttl">短片 · 北京南站爱心服务区节前采访</span>
+      <span class="tc">00:01:02 — 00:01:10</span><span class="dur">DUR 07:12</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">08</span></div>
+      <div class="clip-inner">
+        <h2>纪实向 · 北京南站节前采访</h2>
+        <p class="lede">对北京南站爱心服务区的节前采访——在春运的人流里，记录一份仍在运转的善意。</p>
+        <div class="video" style="margin-top:36px">
+          <span class="io in">[ IN</span><span class="io out">OUT ]</span>
+          <iframe loading="lazy" class="bilibili-iframe" <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114635864805121&bvid=BV1CUTKzbEDM&cid=30351689369&p=1&autoplay=0" allowfullscreen loading="lazy" title="北京南站节前采访"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · H5 波斯毯 -->
+  <section class="clip" data-track="V3" data-name="H5 · 波斯毯 千年谈">
+    <div class="clip-rail">
+      <span class="tk">V3</span><span class="ttl">HTML5 交互设计 · 波斯毯 千年谈</span>
+      <span class="tc">00:01:14 — 00:01:26</span><span class="dur">DUR 12:00</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">09</span></div>
+      <div class="clip-inner">
+        <h2>用交互设计唤醒千年记忆。</h2>
+        <p class="lede">文化遗产向交互设计《波斯毯 千年谈》——以可触可滚的方式，把一段千年记忆重新交给读者。</p>
+        <div class="h5-card" style="margin-top:36px">
+          <div class="cover"><img src="assets/开屏页.png" alt="波斯毯 千年谈 开屏页" loading="lazy" /></div>
+          <div>
+            <p class="lede" style="margin-top:0">省级二等奖作品。点击进入浏览完整交互体验。</p>
+            <a class="award" href="http://h5.founderfx.cn/h/v/Aa1dLQ" target="_blank" rel="noopener">浏览《波斯毯 千年谈》↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · H5 阿尔吉侬 -->
+  <section class="clip" data-track="V3" data-name="H5 · 献给阿尔吉侬的花束">
+    <div class="clip-rail">
+      <span class="tk">V3</span><span class="ttl">沉浸式阅读 · 花落知多少——《献给阿尔吉侬的花束》导读</span>
+      <span class="tc">00:01:26 — 00:01:38</span><span class="dur">DUR 12:00</span>
+    </div>
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">10</span></div>
+      <div class="clip-inner">
+        <h2>沉浸式阅读 · 花落知多少</h2>
+        <p class="lede">《献给阿尔吉侬的花束》导读——使用方正飞翔创作，参与 2025 年第 13 届全国大学生新媒体创意大赛。</p>
+        <div class="h5-card" style="margin-top:36px">
+          <div class="cover"><img src="assets/封面设计1.png" alt="献给阿尔吉侬的花束 封面" loading="lazy" /></div>
+          <div>
+            <p class="lede" style="margin-top:0">沉浸式阅读体验设计。点击进入浏览。</p>
+            <a class="award" href="https://h5.founderfx.cn/TQMS/resourceDir/20250522/3d13d4e6d9924884b2ffb28bf8d40003/index.html?param=Aa1bur_Dupo1i4" target="_blank" rel="noopener">浏览《献给阿尔吉侬的花束》导读 ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · END -->
+  <section class="clip end" data-track="END" data-name="END · 试错轨迹">
+    <div class="clip-body">
+      <div class="layer-back"><span class="big-num">END</span></div>
+      <div class="clip-inner">
+        <p class="line">这里是我的作品集，<br>也是我的试错轨迹。</p>
+        <div class="eor"><span class="bar"></span>END OF REEL<span class="tc-global">00:02:00:00</span><span class="bar"></span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = matchMedia('(max-width: 720px)').matches;
+  if(reduce) document.body.classList.add('reduce');
+  if(isMobile) document.body.classList.add('is-mobile');
+
+  const FPS=24, TOTAL=2*60*FPS;
+  const pad=n=>String(n).padStart(2,'0');
+  function framesToTC(frames){
+    frames=Math.max(0,Math.floor(frames));
+    const f=frames%FPS, s=Math.floor(frames/FPS)%60, m=Math.floor(frames/(FPS*60))%60;
+    return `${pad(m)}:${pad(s)}:${pad(f)}`;
+  }
+  const reelEl=document.getElementById('reel');
+  const playhead=document.getElementById('playhead');
+  const tcNow=document.getElementById('tcNow');
+  const nowTk=document.getElementById('nowTk');
+  const nowName=document.getElementById('nowName');
+  const nowTc=document.getElementById('nowTc');
+
+  if(window.gsap){ gsap.registerPlugin(ScrollTrigger); }
+
+  let lenis=null;
+  if(!reduce){
+    lenis=new Lenis({lerp:0.09,smoothWheel:true,wheelMultiplier:1});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(t=>lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  const clips=gsap.utils.toArray('section.clip');
+  function setActive(clip){
+    nowTk.textContent=clip.dataset.track||'V1';
+    nowName.textContent=clip.dataset.name||'';
+  }
+
+  clips.forEach((clip)=>{
+    const back=clip.querySelector('.layer-back');
+    const inner=clip.querySelector('.clip-inner');
+
+    if(!reduce && !isMobile){
+      /* 视差幅度大幅收小：背景 yPercent -2..2，内容 y 24..-24 */
+      if(back){ gsap.set(back,{z:-120}); gsap.fromTo(back,{yPercent:-2},{yPercent:2,ease:'none',scrollTrigger:{trigger:clip,scrub:true,start:'top bottom',end:'bottom top'}}); }
+      if(inner){ gsap.fromTo(inner,{y:24},{y:-24,ease:'none',scrollTrigger:{trigger:clip,scrub:true,start:'top bottom',end:'bottom top'}}); }
+      gsap.from(clip.querySelectorAll('.clip-rail,.clip-inner > *'),{y:24,opacity:0,duration:0.7,ease:'power2.out',stagger:0.05,scrollTrigger:{trigger:clip,start:'top 80%'}});
+    }else{
+      gsap.set([back],{clearProps:'transform'});
+      gsap.from(clip.querySelectorAll('.clip-rail,.clip-inner > *'),{y:14,opacity:0,duration:0.5,scrollTrigger:{trigger:clip,start:'top 85%'}});
+    }
+
+    ScrollTrigger.create({
+      trigger:clip,start:'top 55%',end:'bottom 45%',
+      onToggle:self=>{ if(self.isActive) setActive(clip); }
+    });
+  });
+
+  ScrollTrigger.create({
+    trigger:document.documentElement,start:0,end:'max',scrub:true,
+    onUpdate:self=>{
+      const p=self.progress;
+      playhead.style.left=(p*100)+'%';
+      const t=framesToTC(p*TOTAL);
+      tcNow.textContent=t; nowTc.textContent=t;
+    }
+  });
+
+  /* skew 甩动幅度大幅收小：clamp 6 -> 2，duration 拉长让它更克制 */
+  if(!reduce && !isMobile){
+    let st;
+    lenis.on('scroll',({velocity})=>{
+      const v=gsap.utils.clamp(-2,2,velocity*0.5);
+      gsap.to('.clip-inner',{skewX:v,overwrite:'auto',duration:0.2});
+      clearTimeout(st);
+      st=setTimeout(()=>gsap.to('.clip-inner',{skewX:0,duration:0.5}),140);
+    });
+  }
+
+  const hero=document.querySelector('.hero');
+  if(hero && !reduce){
+    /* hero 推进幅度收小：Z 340->120，opacity/scale/rotateX 全部减弱 */
+    const hi=hero.querySelector('.hero-inner');
+    gsap.to(hi,{z:120,opacity:0.3,scale:0.97,rotateX:-3,ease:'none',
+      scrollTrigger:{trigger:hero,scrub:true,start:'top top',end:'bottom 35%'}});
+  }
+
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>ScrollTrigger.refresh());}
+  addEventListener('load',()=>ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
+</div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/%E8%96%AF%E7%89%87%E5%85%8D%E6%89%A3%E5%9B%BE%E8%8A%B1%E8%84%B8.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lnterlink</div><div class="author-info-description">愿爱无忧 --maojiangjiang492@gmail.com</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Lnterlink"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Lnterlink" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:maojiangjiang492@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">你好，这里是我的博客！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/%E6%8F%89%E6%90%93%E8%B5%B7%E6%9D%A5%E7%9A%84%E6%96%87%E5%AD%97/" title="无标题">无标题</a><time datetime="2026-05-07T15:06:24.480Z" title="发表于 2026-05-07 23:06:24">2026-05-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/%E4%BB%A3%E7%A0%81%E5%8F%8A%E4%BB%A3%E7%A0%81%E9%98%90%E9%87%8A/" title="无标题">无标题</a><time datetime="2026-05-07T15:06:24.478Z" title="发表于 2026-05-07 23:06:24">2026-05-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/07/%E8%A7%86%E9%A2%91%E4%B8%8E%E7%BD%AE%E9%A1%B6%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/" title="无标题">无标题</a><time datetime="2026-05-07T15:06:22.134Z" title="发表于 2026-05-07 23:06:22">2026-05-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/02/Lnterlink_%E4%B8%AA%E4%BA%BA%E4%BD%9C%E5%93%81%E9%9B%86/" title="个人作品集">个人作品集</a><time datetime="2026-05-01T16:00:00.000Z" title="发表于 2026-05-02 00:00:00">2026-05-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/29/%E6%96%B0%E9%97%BB%E5%AD%A6%E6%A6%82%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89%E6%96%B0%E9%97%BB%E5%AD%A6%E7%9A%84%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9/" title="新闻学概论（三）新闻学的主要内容">新闻学概论（三）新闻学的主要内容</a><time datetime="2025-05-29T14:00:00.000Z" title="发表于 2025-05-29 22:00:00">2025-05-29</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%AA%E8%BE%91/"><span class="card-category-list-name">剪辑</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">技术</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%90%86%E8%AE%BA/"><span class="card-category-list-name">理论</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="card-category-list-name">编程</span><span class="card-category-list-count">4</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/AE/" style="font-size: 1.1em; color: #999">AE</a> <a href="/tags/%E5%90%8E%E6%9C%9F/" style="font-size: 1.1em; color: #999">后期</a> <a href="/tags/Python/" style="font-size: 1.23em; color: #999ea6">Python</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.5em; color: #99a9bf">笔记</a> <a href="/tags/%E7%BC%96%E8%BE%91/" style="font-size: 1.1em; color: #999">编辑</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.37em; color: #99a4b2">教程</a> <a href="/tags/%E7%BA%AA%E5%AE%9E%E6%91%84%E5%BD%B1/" style="font-size: 1.1em; color: #999">纪实摄影</a> <a href="/tags/%E6%96%B0%E9%97%BB%E5%AD%A6/" style="font-size: 1.23em; color: #999ea6">新闻学</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              五月 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">15</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-25T12:06:24.615Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By Lnterlink</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">愿作一切美好的信使</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><div id="aplayer"></div><script>
+document.addEventListener('DOMContentLoaded', function() {
+  new APlayer({
+    container: document.getElementById('aplayer'),
+    fixed: true,
+    loop: 'all',
+    autoplay: false,
+    mutex: true,
+    order: 'random',
+    audio: [
+      {
+        title: '个人编曲作品-三月语',
+        author: 'Lnterlink',
+        url: '/music/三月练习.mp3',
+        cover: 'https://y.qq.com/music/photo_new/T062R300x300M000000tke4v1zaB6q.jpg'
+      },
+      {
+        title: '个人编曲作品-尾声',
+        author: 'Lnterlink',
+        url: '/music/尾声.mp3',
+        cover: 'https://y.qq.com/music/photo_new/T062R300x300M000000tke4v1zaB6q.jpg'
+      },
+    ]
+  });
+});
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="输入关键词搜索" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
