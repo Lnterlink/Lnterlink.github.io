@@ -23,9 +23,8 @@
 
 <style>
 /* ═══════════════════════════════════════════════════
-   呐罕 v4.1「沉积层·破土」· 精修版
-   配色：暖墨色 + 余烬橙 + 奶白 + 海青 + 琥珀
-   不再用灰黑配纯红，改用有温度的编辑级配色
+   呐罕 v5.21 · 非均匀摄像机映射 · 交互区物件垂直居中
+   分段线性曲线使 3D 物件在对应交互提示区自然居中
    ═══════════════════════════════════════════════════ */
 :root {
   /* 暖墨色系（带棕调的深色，不是冷灰黑） */
@@ -113,6 +112,26 @@
   .loader-sub { font-size: 0.5rem; margin-bottom: 28px; }
 }
 
+/* ── v5.12 桌面端推荐提示（所有设备显示） ── */
+.loader-desktop-hint {
+  margin-top: 32px;
+  padding: 10px 16px;
+  border: 1px solid rgba(232,93,60,0.15);
+  border-radius: 4px;
+  background: rgba(232,93,60,0.04);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: rgba(240,230,210,0.45);
+  line-height: 1.7;
+  transition: opacity 0.4s;
+}
+.loader-desktop-hint .hint-icon {
+  color: var(--ember);
+  opacity: 0.6;
+  margin-right: 6px;
+}
+
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { -webkit-text-size-adjust:100%; scroll-behavior:auto; }
 
@@ -142,18 +161,18 @@ body::before {
 .content-layer a, .content-layer button, .content-layer [data-interactive] { pointer-events: auto; }
 
 .chapter-slot {
-  min-height: 100vh;
+  min-height: 150vh;
   display: flex; align-items: center;
-  padding: 0 8vw;
+  padding: 12vh 8vw 12vh;
   justify-content: flex-start;
 }
-.chapter-slot.tall { min-height: 200vh; }
+.chapter-slot.tall { min-height: 250vh; }
 
-/* ── v5.4 交互暂停区 · 文字与 3D 交替呼吸 ── */
+/* ── v5.18 交互暂停区 · 文字与 3D 交替呼吸 ── */
 .interact-slot {
-  min-height: 65vh;
+  min-height: 90vh;
   display: flex; align-items: center; justify-content: center;
-  padding: 0 8vw;
+  padding: 10vh 8vw 10vh;
   position: relative;
 }
 .interact-pause {
@@ -192,6 +211,22 @@ body::before {
   margin: 1.2em auto;
   max-width: 380px;
 }
+
+/* ── v5.18 呼吸间距 · 章节间留白 ── */
+.spacer-slot {
+  min-height: 50vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 8vw;
+  position: relative;
+}
+.spacer-slot::after {
+  content: "";
+  width: 32px; height: 1px;
+  background: rgba(232,93,60,0.12);
+  opacity: 0; transition: opacity 0.8s ease;
+}
+/* 当 spacer 接近可视时，分隔线渐显（由 IntersectionObserver 触发） */
+.spacer-slot.revealed::after { opacity: 1; }
 
 /* 内容卡片：暖墨玻璃，不再是冷灰 */
 .glass {
@@ -435,6 +470,8 @@ body::before {
 @media (max-width: 768px) {
   .bgm-toggle { top: 18px; left: 18px; padding: 6px 10px; }
 }
+
+.ch-marker {
   position: fixed; top: 28px; right: 36px; z-index: 50;
   font-family: var(--font-mono); font-size: 0.62rem;
   color: var(--cream-faint); letter-spacing: 0.18em; text-align: right;
@@ -595,6 +632,7 @@ body::before {
   transform: translateX(100%);
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
   overflow-y: auto; pointer-events: auto;
+  overscroll-behavior: contain;
 }
 .archive-drawer.open { transform: translateX(0); }
 .archive-drawer::-webkit-scrollbar { width: 3px; }
@@ -710,6 +748,7 @@ body::before {
   position: fixed; inset: 0; z-index: 220;
   display: none; align-items: center; justify-content: center;
   pointer-events: none;
+  overflow: hidden;
 }
 .music-overlay.open { display: flex; pointer-events: auto; }
 .music-overlay-bg {
@@ -720,8 +759,13 @@ body::before {
   opacity: 0; transition: opacity 0.5s ease;
 }
 .music-overlay.open .music-overlay-bg { opacity: 1; }
+.music-panel::-webkit-scrollbar { width: 4px; }
+.music-panel::-webkit-scrollbar-thumb { background: rgba(240,230,210,0.1); border-radius: 2px; }
+.music-panel::-webkit-scrollbar-track { background: transparent; }
 .music-panel {
   position: relative; width: min(420px, 90vw);
+  max-height: 88vh;
+  overflow-y: auto;
   background: linear-gradient(168deg, rgba(24,18,12,0.94) 0%, rgba(16,12,8,0.96) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -731,6 +775,7 @@ body::before {
   padding: 36px 36px 32px;
   transform: translateY(30px) scale(0.98); opacity: 0;
   transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+  overscroll-behavior: contain;
 }
 .music-overlay.open .music-panel { transform: translateY(0) scale(1); opacity: 1; }
 .music-panel::before {
@@ -950,9 +995,10 @@ body::before {
 .timeline-overlay {
   position: fixed; inset: 0; z-index: 210;
   display: none; pointer-events: none;
-  overflow-y: auto; overflow-x: hidden;
+  align-items: center; justify-content: center;
+  overflow: hidden;
 }
-.timeline-overlay.open { display: block; pointer-events: auto; }
+.timeline-overlay.open { display: flex; pointer-events: auto; }
 .timeline-overlay-bg {
   position: fixed; inset: 0;
   background:
@@ -965,7 +1011,9 @@ body::before {
 /* v5.6：面板从右侧滑入 + 弹性展开 */
 .timeline-panel {
   position: relative; width: min(480px, 92vw);
-  margin: 5vh auto 8vh;
+  max-height: 84vh;
+  overflow-y: auto;
+  margin: 0 auto;
   background:
     linear-gradient(168deg,
       rgba(237,224,204,0.92) 0%,
@@ -985,17 +1033,19 @@ body::before {
   /* v5.6 动画：从右下方弹入 */
   transform: translateX(40px) scale(0.94); opacity: 0;
   transition: transform 0.65s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease;
+  overscroll-behavior: contain;
 }
 .timeline-overlay.open .timeline-panel {
   transform: translateX(0) scale(1); opacity: 1;
 }
 /* 滚动条样式在 overlay 上 */
-.timeline-overlay::-webkit-scrollbar { width: 5px; }
-.timeline-overlay::-webkit-scrollbar-thumb {
+/* v5.16：面板自有滚动条，与主页面区分 */
+.timeline-panel::-webkit-scrollbar { width: 5px; }
+.timeline-panel::-webkit-scrollbar-thumb {
   background: rgba(184,67,31,0.25); border-radius: 3px;
 }
-.timeline-overlay::-webkit-scrollbar-thumb:hover { background: rgba(184,67,31,0.45); }
-.timeline-overlay::-webkit-scrollbar-track { background: rgba(138,122,95,0.06); }
+.timeline-panel::-webkit-scrollbar-thumb:hover { background: rgba(184,67,31,0.45); }
+.timeline-panel::-webkit-scrollbar-track { background: rgba(138,122,95,0.06); }
 /* 顶部装饰光带 */
 .timeline-panel::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -1211,7 +1261,7 @@ body::before {
 }
 /* v5.6 移动端适配 */
 @media (max-width: 768px) {
-  .timeline-panel { padding: 28px 20px 48px; margin: 3vh auto 6vh; }
+  .timeline-panel { max-height: 88vh; padding: 28px 20px 48px; margin: 0 auto; }
   .tl-hero-num { font-size: 1.6rem; }
   .tl-compare-block { grid-template-columns: 1fr; }
 }
@@ -1262,32 +1312,41 @@ body::before {
   display: flex; align-items: center; gap: 0;
   background: none; backdrop-filter: none;
   border: none; border-radius: 0;
-  color: var(--cream-faint); font-family: var(--font-mono);
+  color: rgba(240,230,210,0.85); font-family: var(--font-mono);
   font-size: 0.6rem; letter-spacing: 0.12em;
   padding: 7px 0; cursor: pointer;
-  transition: color 0.3s, letter-spacing 0.3s;
+  transition: color 0.6s ease, letter-spacing 0.3s;
   text-transform: uppercase;
   text-align: left;
 }
 .explore-btn:hover { color: var(--cream); letter-spacing: 0.18em; }
 .explore-btn .dot {
   width: 4px; height: 4px; border-radius: 50%;
-  background: var(--ember); box-shadow: none;
+  background: var(--ember); box-shadow: 0 0 6px var(--ember-glow);
   margin-right: 10px; flex-shrink: 0;
-  opacity: 0.6; transition: opacity 0.3s, box-shadow 0.3s;
+  opacity: 0.9; transition: opacity 0.6s ease, box-shadow 0.6s ease;
 }
-.explore-btn:hover .dot { opacity: 1; box-shadow: 0 0 8px var(--ember-glow); }
+.explore-btn:hover .dot { opacity: 1; box-shadow: 0 0 10px var(--ember-glow); }
+/* v5.14 滚动后淡化 */
+.explore-toggle.faded .explore-btn {
+  color: var(--cream-faint);
+}
+.explore-toggle.faded .explore-btn .dot {
+  opacity: 0.6; box-shadow: none;
+}
 
 
 /* ═══ v5.3 病历放大档案卡 · 质感简约 ═══ */
+/* 与 timeline-overlay 结构完全一致：overlay 可滚动 + bg 在内部 fixed + 卡片用 margin auto 居中 */
 .record-focus-overlay {
   position: fixed; inset: 0; z-index: 150;
-  display: none; align-items: center; justify-content: center;
-  pointer-events: none;
+  display: none; pointer-events: none;
+  align-items: center; justify-content: center;
+  overflow: hidden;
 }
 .record-focus-overlay.open { display: flex; pointer-events: auto; }
 .record-focus-bg {
-  position: absolute; inset: 0;
+  position: fixed; inset: 0;
   background: radial-gradient(ellipse at center, rgba(20,16,12,0.5) 0%, rgba(10,8,6,0.86) 75%);
   backdrop-filter: blur(12px) saturate(0.8);
   -webkit-backdrop-filter: blur(12px) saturate(0.8);
@@ -1296,18 +1355,24 @@ body::before {
 .record-focus-overlay.open .record-focus-bg { opacity: 1; }
 .record-focus-card {
   position: relative; width: min(520px, 90vw);
-  max-height: 84vh; overflow-y: auto;
+  max-height: 84vh;
+  overflow-y: auto;
   background: #EDE0CC;
   border: 1px solid rgba(184,67,31,0.12);
   border-radius: 4px;
   box-shadow: 0 30px 80px rgba(0,0,0,0.4);
   color: #2A1E12; padding: 52px 44px 40px;
+  margin: 0 auto;
   transform: scale(0.95) translateY(20px); opacity: 0;
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+  overscroll-behavior: contain;
 }
 .record-focus-overlay.open .record-focus-card { transform: scale(1) translateY(0); opacity: 1; }
-.record-focus-card::-webkit-scrollbar { width: 3px; }
-.record-focus-card::-webkit-scrollbar-thumb { background: rgba(184,67,31,0.15); }
+/* v5.16：卡片自有滚动条，细线余烬色，与主页面区分 */
+.record-focus-card::-webkit-scrollbar { width: 5px; }
+.record-focus-card::-webkit-scrollbar-thumb { background: rgba(184,67,31,0.25); border-radius: 3px; }
+.record-focus-card::-webkit-scrollbar-thumb:hover { background: rgba(184,67,31,0.45); }
+.record-focus-card::-webkit-scrollbar-track { background: rgba(138,122,95,0.06); }
 .rf-header {
   border-bottom: none;
   padding-bottom: 0; margin-bottom: 32px;
@@ -1364,7 +1429,7 @@ body::before {
   text-transform: uppercase;
 }
 .rf-close-hint {
-  position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
+  margin-top: 28px; text-align: center;
   font-family: var(--font-mono); font-size: 0.52rem;
   color: rgba(240,230,210,0.35); letter-spacing: 0.2em;
   white-space: nowrap; text-transform: uppercase;
@@ -1381,11 +1446,13 @@ body::before {
 .theme-record .record-focus-card { background: #EDE0CC; }
 .theme-record .rf-tag, .theme-record .rf-section h4, .theme-record .rf-section strong, .theme-record .rf-stamp { color: #B8431F; }
 .theme-record .rf-quote { border-left-color: #B8431F; }
+.theme-record .rf-close-hint { color: #8A7A5F; }
 
 .theme-bottle .record-focus-card { background: #F5E6C8; }
 .theme-bottle .rf-tag, .theme-bottle .rf-section h4, .theme-bottle .rf-section strong, .theme-bottle .rf-stamp { color: #8B6914; }
 .theme-bottle .rf-quote { border-left-color: #D4A82C; }
 .theme-bottle .rf-section .value { color: #8B6914; }
+.theme-bottle .rf-close-hint { color: #8A7A5F; }
 .rf-bottle-ring { display: flex; justify-content: space-around; gap: 8px; margin: 20px 0 28px; padding: 0; background: none; border-radius: 0; }
 .rf-ring-item { text-align: center; flex: 1; }
 .rf-ring-num { font-family: var(--font-mono); font-weight: 700; font-size: 1.4rem; color: #8B6914; line-height: 1.2; }
@@ -1405,6 +1472,7 @@ body::before {
 .theme-mic .rf-quote { border-left-color: var(--ember); color: var(--cream); }
 .theme-mic .rf-quote .source { color: rgba(168,155,133,0.5); }
 .theme-mic .rf-close-hint { color: rgba(240,230,210,0.35); }
+.theme-mic .rf-close-hint { color: rgba(240,230,210,0.35); }
 .rf-wave-deco { display: flex; align-items: center; justify-content: center; gap: 4px; height: 32px; margin: 16px 0 24px; }
 .rf-wave-bar { width: 4px; background: var(--ember); border-radius: 2px; animation: waveBar 1.2s ease-in-out infinite; }
 .rf-wave-bar:nth-child(1) { height: 12px; animation-delay: 0s; }
@@ -1419,21 +1487,24 @@ body::before {
 .theme-portrait .rf-quote { border-left-color: #6B5A48; }
 .theme-portrait .rf-stat-row .label { color: #5A4A38; }
 .theme-portrait .rf-stat-row .value { color: #B8431F; }
+.theme-portrait .rf-close-hint { color: #8A7A5F; }
 .rf-flip-deco { text-align: center; font-family: var(--font-mono); font-size: 0.6rem; color: rgba(107,90,72,0.5); letter-spacing: 0.2em; margin: 12px 0 20px; animation: flipHint 2s ease-in-out infinite; text-transform: uppercase; }
 @keyframes flipHint { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
 
 .theme-label .record-focus-card { background: #E8E0D0; }
 .theme-label .rf-tag, .theme-label .rf-section h4, .theme-label .rf-section strong, .theme-label .rf-stamp { color: #1A6B5F; }
 .theme-label .rf-quote { border-left-color: var(--teal); }
+.theme-label .rf-close-hint { color: #8A7A5F; }
 .rf-slash-deco { text-align: center; font-family: var(--font-mono); font-size: 0.6rem; color: rgba(184,67,31,0.5); letter-spacing: 0.2em; margin: 12px 0 20px; text-transform: uppercase; }
 .rf-slash-deco::after { content: ""; position: absolute; left: 10%; right: 10%; top: 50%; height: 1px; background: rgba(184,67,31,0.3); transform: scaleX(0); animation: slashGrow 1.5s ease-out 0.3s forwards; }
 @keyframes slashGrow { to { transform: scaleX(1); } }
 /* ── v5.4 移动端 · 统一断点 ── */
 @media (max-width: 768px) {
   .archive-drawer { width: 100vw; }
-  .chapter-slot { padding: 0 6vw; min-height: 90vh; }
+  .chapter-slot { padding: 8vh 6vw; min-height: 100vh; }
   .chapter-slot.tall { min-height: 160vh; }
-  .interact-slot { min-height: 55vh; padding: 0 6vw; }
+  .interact-slot { min-height: 65vh; padding: 6vh 6vw; }
+  .spacer-slot { min-height: 35vh; }
   .glass { padding: 24px 18px; max-width: 100%; }
   .story-block { max-width: 100%; }
   .story-block .sb-head { margin-bottom: 1.8em; gap: 12px; }
@@ -1459,7 +1530,7 @@ body::before {
   .epilogue-text { font-size: clamp(1rem, 4.2vw, 1.4rem); line-height: 2.1; }
   .epilogue-foot { margin-top: 36px; font-size: 0.56rem; }
   .epilogue-foot button { margin: 0 6px; }
-  .record-focus-card { padding: 24px 18px; }
+  .record-focus-card { max-height: 90vh; padding: 24px 18px; }
   .rf-header { flex-direction: column; }
   .rf-stamp { align-self: flex-start; margin-top: 8px; }
   .ad-member-full { max-height: 240px; }
@@ -1486,6 +1557,9 @@ body::before {
     <div class="loader-meta">
       <span id="loaderText">正在加载...</span>
       <span id="loaderPercent">0%</span>
+    </div>
+    <div class="loader-desktop-hint">
+      <span class="hint-icon">▸</span>推荐使用桌面端浏览，获得最佳沉浸式体验
     </div>
   </div>
 </div>
@@ -1514,6 +1588,7 @@ body::before {
   let target = 0;
   let raf = null;
   let finished = false;
+  let autoTimerId = null;
 
   function update() {
     if (finished) return;
@@ -1543,6 +1618,7 @@ body::before {
     if (finished) return;
     finished = true;
     if (raf) cancelAnimationFrame(raf);
+    if (autoTimerId) { clearInterval(autoTimerId); autoTimerId = null; }
     target = 100; current = 100;
     fill.style.width = '100%';
     percent.textContent = '100%';
@@ -1554,8 +1630,8 @@ body::before {
   };
 
   // 自动缓增，避免长时间停留在 0%
-  let auto = setInterval(() => {
-    if (finished) { clearInterval(auto); return; }
+  autoTimerId = setInterval(() => {
+    if (finished) { clearInterval(autoTimerId); autoTimerId = null; return; }
     if (current < 85) {
       window.setLoaderProgress(Math.min(0.9, current / 100 + 0.015));
     }
@@ -1586,6 +1662,9 @@ body::before {
     <div class="case-id">CASE NO. 8772-BTTZ-2015-2026</div>
   </section>
 
+  <!-- spacer -->
+  <div class="spacer-slot"></div>
+
   <!-- ══ ch1 文字：一句话 ══ -->
   <section class="chapter-slot" id="slot-ch1" data-ch="1">
     <div class="story-block">
@@ -1600,6 +1679,8 @@ body::before {
     </div>
   </section>
 
+  <div class="spacer-slot"></div>
+
   <!-- ══ ch1 交互：病历纸 ══ -->
   <section class="interact-slot" data-ch="1b">
     <div class="interact-pause">
@@ -1612,6 +1693,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 点击飘浮的病历纸</div>
     </div>
   </section>
+
+  <div class="spacer-slot"></div>
 
   <!-- ══ ch2 文字：27 天 ══ -->
   <section class="chapter-slot" id="slot-ch2" data-ch="2">
@@ -1630,6 +1713,8 @@ body::before {
       <p>同一年，中国的罕见病立法，还是零。而这七个人，即将站上舞台。</p>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch2 交互：肖像框 ══ -->
   <section class="interact-slot" data-ch="2b">
@@ -1647,6 +1732,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 点击肖像框</div>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch3 文字：他们 ══ -->
   <section class="chapter-slot" id="slot-ch3" data-ch="3">
@@ -1665,6 +1752,8 @@ body::before {
       <p>他们能站上舞台，是因为属于少数"幸运儿"。没站上舞台的那些人，在哪？十年间，制度又在哪？</p>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch3 交互：年份时间轴 ══ -->
   <section class="interact-slot" data-ch="3b">
@@ -1682,6 +1771,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 点击年份文字</div>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch4 文字：十年 ══ -->
   <section class="chapter-slot" id="slot-ch4" data-ch="4">
@@ -1702,6 +1793,8 @@ body::before {
       <p>十年间，约 100 种罕见病用药纳入医保。但进步发生了，还远远没有抵达。</p>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch4 交互：药瓶墙 ══ -->
   <section class="interact-slot" data-ch="4b">
@@ -1719,6 +1812,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 点击药瓶</div>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch5 文字：排练室 ══ -->
   <section class="chapter-slot" id="slot-ch5" data-ch="5">
@@ -1738,6 +1833,8 @@ body::before {
       <p>如果城市再友好一点，这两小时本可以用来做什么？</p>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch5 交互：麦克风 ══ -->
   <section class="interact-slot" data-ch="5b">
@@ -1755,6 +1852,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 点击麦克风</div>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch6 文字：标签 ══ -->
   <section class="chapter-slot" id="slot-ch6" data-ch="6">
@@ -1774,6 +1873,8 @@ body::before {
       <p>中国至今没有《反就业歧视法》，罕见病外貌特征缺乏法律保护。"善意的标签"之所以也是伤害，是因为它让社会停在"同情"这一步，不再往前走。</p>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch6 交互：标签卡片 ══ -->
   <section class="interact-slot" data-ch="6b">
@@ -1787,6 +1888,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 点击飘浮的标签</div>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch7 文字：6 月 6 日 ══ -->
   <section class="chapter-slot" id="slot-ch7" data-ch="7">
@@ -1807,6 +1910,8 @@ body::before {
       <p>十年了，他们还在。崔莹说："我不希望十年后，我们还需要用唱歌才能被听见。"</p>
     </div>
   </section>
+<div class="spacer-slot"></div>
+
 
   <!-- ══ ch7 交互：破土 · 数据收束 ══ -->
   <section class="interact-slot" data-ch="7b">
@@ -1820,6 +1925,8 @@ body::before {
       <div class="interact-hint-arrow">↓ 继续向下 · 跋</div>
     </div>
   </section>
+
+  <div class="spacer-slot"></div>
 
   <!-- 跋 -->
   <section class="chapter-slot" id="slot-epilogue" data-ch="8" style="justify-content:center;">
@@ -1864,6 +1971,9 @@ body::before {
   </button>
   <button class="explore-btn" data-drawer="sources" data-interactive>
     <span class="dot"></span>资料来源
+  </button>
+  <button class="explore-btn" data-drawer="production-team" data-interactive>
+    <span class="dot"></span>制作团队
   </button>
 </div>
 
@@ -2046,7 +2156,7 @@ function makeStrataTexture() {
   return tex;
 }
 
-// 标签纹理（带文字的卡片）
+// 标签纹理（带文字的卡片，自动缩放长文本）
 function makeLabelTexture(text) {
   const c = document.createElement('canvas');
   c.width = 384; c.height = 192;
@@ -2055,9 +2165,16 @@ function makeLabelTexture(text) {
   ctx.fillStyle = '#EDE0CC'; ctx.fillRect(0,0,384,192);
   ctx.strokeStyle = 'rgba(184,67,31,0.4)'; ctx.lineWidth = 3;
   ctx.strokeRect(4,4,376,184);
-  // 文字
-  ctx.fillStyle = '#5A3A20'; ctx.font = 'bold 48px "Noto Serif SC", serif';
+  // 文字（自动缩放）
+  ctx.fillStyle = '#5A3A20';
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  var fontSize = 48;
+  var maxWidth = 340;
+  ctx.font = 'bold ' + fontSize + 'px "Noto Serif SC", serif';
+  while (fontSize > 18 && ctx.measureText(text).width > maxWidth) {
+    fontSize -= 3;
+    ctx.font = 'bold ' + fontSize + 'px "Noto Serif SC", serif';
+  }
   ctx.fillText(text, 192, 96);
   // 穿绳孔
   ctx.fillStyle = '#1E1812'; ctx.beginPath(); ctx.arc(192, 18, 6, 0, Math.PI*2); ctx.fill();
@@ -2195,31 +2312,56 @@ function makePillBottle(scale = 1) {
 // 第四章：药瓶档案柜墙（每个药瓶对应不同药品/保障维度）
 const bottleGrid = new THREE.Group();
 scene.add(bottleGrid);
-const DRUG_ARCHIVE_KEYS = ['drug-catalog', 'drug-medicare', 'drug-payment', 'drug-network', 'drug-gap', 'drug-pipeline'];
-const gridCols = 10, gridRows = 7;
+const DRUG_ARCHIVE_KEYS = [
+  'drug-catalog', 'drug-medicare', 'drug-payment', 'drug-network', 'drug-gap', 'drug-pipeline',
+  'drug-sma', 'drug-risdiplam', 'drug-fabry', 'drug-gaucher', 'drug-hemophilia', 'drug-mps',
+  'drug-direct-report', 'drug-province', 'drug-clinical-trial', 'drug-86-billion',
+];
+// 药瓶标签文字（对应 16 个维度）
+const DRUG_LABEL_TEXTS = [
+  '罕见病目录', '医保药品', '支付规模', '诊疗网络', '保障缺口', '孤儿药研发',
+  'SMA·诺西那生钠', 'SMA·利司扑兰', '法布雷病', '戈谢病', '血友病A', '黏多糖贮积症',
+  '直报系统', '地方保障', '临床试验', '86亿支付',
+];
+const gridCols = 10, gridRows = 8;
 for (let i = 0; i < gridCols; i++) {
   for (let j = 0; j < gridRows; j++) {
-    const b = makePillBottle(0.85 + Math.random()*0.2);
-    b.userData.drugKey = DRUG_ARCHIVE_KEYS[(i + j * gridCols) % DRUG_ARCHIVE_KEYS.length];
-    b.position.set(
+    const idx = (i + j * gridCols) % DRUG_ARCHIVE_KEYS.length;
+    // 每个药瓶用对应的标签文字
+    const labelTex = makeLabelTexture(DRUG_LABEL_TEXTS[idx]);
+    const bodyMat = bottleMat.clone();
+    const capMat = capMaterial.clone();
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 1.4, 12), bodyMat);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.35, 12), capMat);
+    cap.position.y = 0.87;
+    const labelGeo = new THREE.PlaneGeometry(0.9, 0.6);
+    const labelMat2 = new THREE.MeshBasicMaterial({ map: labelTex, transparent: true, side: THREE.DoubleSide });
+    const label = new THREE.Mesh(labelGeo, labelMat2);
+    label.position.set(0, 0, 0.51);
+    body.add(label);
+    g.add(body, cap);
+    g.scale.setScalar(0.85 + Math.random() * 0.2);
+    g.userData.drugKey = DRUG_ARCHIVE_KEYS[idx];
+    g.position.set(
       (i - gridCols/2) * 1.8,
       18 + j * 1.5,
       (Math.random()-0.5) * 3 - 14
     );
     // 大部分暗（未覆盖），少数亮（纳入目录）
     const covered = Math.random() < 0.15;
-    b.children.forEach(ch => {
+    g.children.forEach(ch => {
       if (ch.material) {
         if (!covered) ch.material = ch.material.clone();
         ch.userData.baseOpacity = ch.material.opacity;
       }
     });
     if (!covered) {
-      b.children[0].material.opacity = 0.15;
-      b.children[0].material.color.setHex(0x4A3A28);
-      b.children[0].userData.baseOpacity = 0.15;
+      g.children[0].material.opacity = 0.15;
+      g.children[0].material.color.setHex(0x4A3A28);
+      g.children[0].userData.baseOpacity = 0.15;
     }
-    bottleGrid.add(b);
+    bottleGrid.add(g);
   }
 }
 
@@ -2723,8 +2865,42 @@ function onScroll() {
   document.getElementById('progressBar').style.width = (scrollProgress * 100) + '%';
   if (scrollProgress > 0.02) document.getElementById('scrollHint').classList.add('hidden');
   else document.getElementById('scrollHint').classList.remove('hidden');
+  // v5.14 左侧导航：序章时醒目，正文出现后淡化
+  const exploreToggle = document.querySelector('.explore-toggle');
+  if (exploreToggle) {
+    if (scrollProgress > 0.06) exploreToggle.classList.add('faded');
+    else exploreToggle.classList.remove('faded');
+  }
 }
 window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ═══════ v5.21 非均匀摄像机映射曲线 ═══════
+   将 scrollProgress 映射为 camera y，使交互区 3D 物件垂直居中于屏幕。
+   这是一条分段线性光滑曲线，不影响滚动平滑性。 */
+const CAMERA_CURVE = [
+  [0.00, -82],   // 起点：序章深渊
+  [0.15, -63],   // ch1b 病历纸中心
+  [0.28, -35.5], // ch2b 肖像框中心
+  [0.39, -5],    // ch3b 年份轴中心
+  [0.54, 21],    // ch4b 药瓶墙中心
+  [0.67, 38],    // ch5b 麦克风中心
+  [0.80, 72.5],  // ch6b 标签卡中心
+  [0.92, 89],    // ch7b 破土舞台中心
+  [1.00, 111],   // 终点
+];
+
+function getCameraY(sp) {
+  sp = Math.max(0, Math.min(1, sp));
+  for (var i = 0; i < CAMERA_CURVE.length - 1; i++) {
+    if (sp <= CAMERA_CURVE[i + 1][0]) {
+      var s0 = CAMERA_CURVE[i][0], y0 = CAMERA_CURVE[i][1];
+      var s1 = CAMERA_CURVE[i + 1][0], y1 = CAMERA_CURVE[i + 1][1];
+      var t = (sp - s0) / (s1 - s0);
+      return y0 + (y1 - y0) * t;
+    }
+  }
+  return CAMERA_CURVE[CAMERA_CURVE.length - 1][1];
+}
 
 /* ═══════ 章节标记 ═══════ */
 const chapters = [
@@ -2767,7 +2943,7 @@ function animate() {
     STATE.audioData = dataArray;
   }
 
-  const targetY = THREE.MathUtils.lerp(-82, 111, scrollProgress);
+  const targetY = getCameraY(scrollProgress);
   // v5.7 自适应跟踪：滚动时加速，静止时平滑
   const delta = Math.abs(targetY - STATE.y);
   const adaptLerp = Math.min(0.6, 0.15 + delta * 0.008);
@@ -3206,6 +3382,106 @@ const ARCHIVE_DATA = {
       { h: '新闻角度', p: '药品线索不只是价格新闻，也是制度如何为小群体建立激励的问题。' },
     ],
   },
+  'drug-sma': {
+    tag: 'DRUG · SMA · 诺西那生钠', title: '从 70 万一针到 3.3 万',
+    subtitle: '2021 年医保谈判 · 脊髓性肌萎缩症',
+    sections: [
+      { h: '药品背景', p: '诺西那生钠（Nusinersen）是全球首个获批的脊髓性肌萎缩症（SMA）精准治疗药物。进入中国时年治疗费用约 <strong>70 万元</strong>。' },
+      { h: '医保谈判', p: '2021 年底，经国家医保谈判，诺西那生钠纳入医保，价格降至约 <strong>3.3 万元/针</strong>。这是中国罕见病高值药进入医保的标志性事件。' },
+      { h: '患者规模', p: 'SMA 在中国新生儿发病率约为 <strong>1/6000～1/10000</strong>，全国患者约 <strong>3 万人</strong>。' },
+      { stamp: '来源：国家医保局 2021 年医保谈判公告；《中国罕见病定义研究报告》' },
+    ],
+  },
+  'drug-risdiplam': {
+    tag: 'DRUG · SMA · 利司扑兰', title: '口服药改变用药方式',
+    subtitle: '2023 年纳入医保 · 全球首个 SMA 口服药',
+    sections: [
+      { h: '药品背景', p: '利司扑兰（Risdiplam）是全球首个 SMA 口服治疗药物，无需鞘内注射，对儿童和成人患者都更易获得。' },
+      { h: '医保准入', p: '<strong>2023 年</strong>国家医保谈判中，利司扑兰成功纳入目录，填补了 SMA 口服药医保保障空白。' },
+      { h: '意义', p: '诺西那生钠需要鞘内注射，利司扑兰是口服溶液——用药方式的差异直接影响患者依从性和生活质量。' },
+      { stamp: '来源：国家医保局 2023 年医保目录调整公告' },
+    ],
+  },
+  'drug-fabry': {
+    tag: 'DRUG · 法布雷病', title: '阿加糖酶α 进入医保',
+    subtitle: '2021 年谈判纳入 · 年治疗费用曾超 60 万',
+    sections: [
+      { h: '疾病背景', p: '法布雷病（Fabry disease）是一种 X 染色体连锁的溶酶体贮积症，可累及肾脏、心脏、神经系统，中国登记患者数百例。' },
+      { h: '药品准入', p: '武田制药的阿加糖酶α（Agalsidase alfa）<strong>2021 年</strong>经医保谈判纳入目录，谈判前年治疗费用超过 <strong>60 万元</strong>。' },
+      { h: '追问', p: '法布雷病需要终身酶替代治疗，即使进入医保，患者仍需关注报销比例、医院可及和长期用药连续性。' },
+      { stamp: '来源：国家医保局 2021 年医保谈判结果；中国罕见病联盟' },
+    ],
+  },
+  'drug-gaucher': {
+    tag: 'DRUG · 戈谢病', title: '伊米苷酶：酶替代的先行者',
+    subtitle: '最早进入中国的罕见病酶替代疗法之一',
+    sections: [
+      { h: '疾病背景', p: '戈谢病（Gaucher disease）是最常见的溶酶体贮积症之一，因葡萄糖脑苷脂酶缺乏导致肝脾肿大、骨痛和贫血。中国已知患者约 <strong>400～500 例</strong>。' },
+      { h: '药品背景', p: '伊米苷酶（Imiglucerase）是戈谢病 I 型的一线酶替代治疗药物。维拉苷酶β（Velaglucerase alfa）是后续获批的替代选择。' },
+      { h: '保障现状', p: '戈谢病酶替代治疗费用高昂（年费用曾达 <strong>百万元级</strong>），部分省市通过大病医保、惠民保等多层次保障覆盖了部分费用，但全国性保障仍有缺口。' },
+      { stamp: '来源：中国戈谢病诊治专家共识；罕见病信息网' },
+    ],
+  },
+  'drug-hemophilia': {
+    tag: 'DRUG · 血友病A', title: '艾美赛珠单抗：改变给药方式',
+    subtitle: '2023 年医保谈判纳入 · 皮下注射替代静脉输注',
+    sections: [
+      { h: '疾病背景', p: '血友病 A 是最常见的遗传性凝血因子缺乏症，中国登记患者约 <strong>4 万例</strong>，其中约 85% 为 A 型。' },
+      { h: '药品准入', p: '艾美赛珠单抗（Emicizumab）是血友病 A 的创新非因子替代疗法，<strong>皮下注射</strong>给药，无需频繁静脉输注。2023 年经医保谈判纳入目录。' },
+      { h: '意义', p: '传统凝血因子 VIII 替代治疗需要频繁静脉注射（每周 2-3 次），对儿童患者尤其困难。艾美赛珠单抗每月 1 次皮下注射，极大改善了治疗便利性。' },
+      { stamp: '来源：国家医保局 2023 年医保目录调整；中国血友病协作组' },
+    ],
+  },
+  'drug-mps': {
+    tag: 'DRUG · 黏多糖贮积症', title: '有药可治，保障仍远',
+    subtitle: '酶替代疗法进入中国，但费用门槛仍高',
+    sections: [
+      { h: '疾病背景', p: '黏多糖贮积症（MPS）是一组因溶酶体酶缺乏导致的遗传代谢病，共 7 个亚型（MPS I～VII），中国已知患者约 <strong>数百例</strong>。' },
+      { h: '药品现状', p: 'MPS I 型的拉罗尼酶（Laronidase）和 MPS II 型的艾杜硫酶（Idursulfase）已在中国获批，但酶替代治疗年费用达 <strong>百万元级</strong>。' },
+      { h: '保障缺口', p: '截至 2024 年，MPS 相关药物尚未全面纳入国家医保。部分地区通过大病保险、惠民保提供有限覆盖，但大多数家庭仍面临沉重负担。' },
+      { stamp: '来源：中国黏多糖贮积症多学科管理专家共识；罕见病信息网' },
+    ],
+  },
+  'drug-direct-report': {
+    tag: 'DRUG · 直报系统', title: '626 家医院参与登记',
+    subtitle: '全国罕见病诊疗信息直报系统',
+    sections: [
+      { h: '系统建设', p: '全国罕见病诊疗信息直报系统已有 <strong>626 家</strong>医院参加登记。直报系统的意义是让"看不见"的患者变得"可统计"，为政策制定提供数据基础。' },
+      { h: '与 419 家的关系', p: '诊疗协作网 419 家医院侧重"转诊和诊疗"，直报系统 626 家侧重"登记和追踪"，两套网络互为补充。' },
+      { h: '追问', p: '626 家听起来不少，但罕见病有 1400 多种。登记数量的增长，反映的是制度在补课，但离"每种罕见病都有据可查"还有很长的路。' },
+      { stamp: '来源：国家卫健委 2025 年 9 月罕见病保障工作通报' },
+    ],
+  },
+  'drug-province': {
+    tag: 'DRUG · 地方保障', title: '国家之外，地方在补位',
+    subtitle: '大病保险、惠民保、地方财政专项',
+    sections: [
+      { h: '多层次保障', p: '在国家医保之外，多地通过大病保险、城市定制型商业医疗保险（"惠民保"）、地方财政专项等方式为罕见病患者补位。' },
+      { h: '典型实践', p: '浙江、上海、青岛等地较早探索了罕见病专项保障基金。以浙江为例，<strong>2020 年</strong>即设立罕见病用药保障基金，对部分高值药实行省级统筹报销。' },
+      { h: '公平性问题', p: '地方保障的覆盖面和报销比例差异很大。同一患者，在不同省份可能面临截然不同的费用负担——这是制度"碎片化"的缩影。' },
+      { stamp: '来源：《中国罕见病高值药物医疗保障研究报告》' },
+    ],
+  },
+  'drug-clinical-trial': {
+    tag: 'DRUG · 临床试验', title: '新药在来的路上',
+    subtitle: '基因治疗、mRNA 疗法、小分子药物',
+    sections: [
+      { h: '研发前沿', p: '近年罕见病新药研发进入活跃期：基因治疗（如 SMA 的 Zolgensma）、mRNA 疗法、小分子药物等多条技术路线并行推进。' },
+      { h: '中国审批', p: '国家药监局已建立罕见病药品优先审评通道，多款罕见病新药加速获批上市。2023 年中国新获批罕见病药品超过 <strong>20 种</strong>。' },
+      { h: '现实距离', p: '从"获批上市"到"患者用得上"之间仍有医保准入、医院进药、医生处方和患者知情等多个环节。获批不等于可及。' },
+      { stamp: '来源：国家药监局罕见病药品审评报告' },
+    ],
+  },
+  'drug-86-billion': {
+    tag: 'DRUG · 支付数据', title: '86 亿元的分母',
+    subtitle: '2024 年医保基金为罕见病药品支付',
+    sections: [
+      { h: '总量数据', p: '2024 年，医保基金为协议期内罕见病药品支付约 <strong>86 亿元</strong>。这约占协议期内药品总支付额的一定比例，说明保障规模在持续扩大。' },
+      { h: '分母追问', p: '86 亿听起来很大，但分摊到 2000 万患者，人均不到 <strong>500 元/年</strong>。而高值药年治疗费用常以十万计——总量增长不等于个体负担减轻。' },
+      { h: '结构问题', p: '支付数据中，纳入医保谈判协议期内的药品只是一部分。目录外药品、非协议期药品、自费部分的缺口，是 86 亿这个数字无法直接回答的。' },
+      { stamp: '来源：国家医保局 2025 年 9 月通报' },
+    ],
+  },
   'click-mic': {
     tag: 'EVIDENCE · 声音档案', title: '排练室的平等',
     subtitle: '每周一次 · 成员从北京各地赶来',
@@ -3480,39 +3756,41 @@ const ARCHIVE_DATA = {
     ],
   },
   'member-cuiying': {
-    tag: 'MEMBER · 主唱/创始人', title: '崔莹',
-    subtitle: '成骨不全症 · 轮椅出行 · 蓝巩膜',
+    tag: 'MEMBER · 主唱/发起人', title: '崔莹',
+    subtitle: '成骨不全症 · 轮椅 · 蓝巩膜 · 38 岁',
     sections: [
       { html: '<img class="ad-member-full" src="assets/members/cuiying.png" alt="崔莹照片">' },
-      { h: '身份', p: '主唱、乐队发起人之一。她更像是把乐队喊出来的人，而不是只在舞台上站着的人。' },
-      { h: '细节', p: '资料里提到她用小尤克里里录歌，觉得这件事“没那么不可想象”。' },
+      { h: '她是谁', p: '乐队主唱、发起人。身高如六七岁孩童，蓝巩膜，坐轮椅。在病痛挑战基金会工作了十余年，2014 年在一场罕见病青年公益活动上说了一句"我们为什么不能自己搞一个乐队？"，没人接话，但两年后 7 个人报了名。' },
+      { h: '一些事', p: '排练倒三趟地铁去；第一次找老师排练时紧张得手抖；演出前摔伤过左小臂两根骨头；2019 年末又严重摔伤，在家休养了大约三年，乐队那段时间基本停摆。' },
+      { h: '声音', p: '瓷娃娃声带窄、细、短，所以声音特别高。她喜欢用尤克里里录歌，觉得"这个过程没那么不可想象"。染发用"调耳染"，颜色随洗次变化，她说像"开盲盒"。' },
     ],
   },
   'member-wangyiou': {
-    tag: 'MEMBER · 创始人', title: '王奕鸥',
-    subtitle: '成骨不全症 · 病痛挑战基金会',
+    tag: 'MEMBER · 主唱/创始人', title: '王奕鸥',
+    subtitle: '成骨不全症 · 病痛挑战基金会发起人',
     sections: [
       { html: '<img class="ad-member-full" src="assets/members/wangyiou.jpg" alt="王奕鸥照片">' },
-      { h: '身份', p: '乐队创始人，也是病痛挑战基金会的发起者之一。她把个人经验拉成了更长的社会行动。' },
-      { h: '细节', p: '十周年时她说，乐队不只是罕见病患者的代言人，也代表更广泛的边缘群体。' },
+      { h: '她是谁', p: '乐队主唱、创始人。2012 年就向马歌提出想组一支罕见病乐队，2016 年发起成立北京病痛挑战公益基金会，把个人经历变成了持续的社会行动。' },
+      { h: '她说', p: '十周年音乐会上她说，乐队不只是罕见病患者的代言人，也代表更广泛的边缘群体。' },
     ],
   },
   'member-chengliting': {
     tag: 'MEMBER · 主音吉他', title: '程丽婷',
-    subtitle: '脊髓灰质炎 · 轮椅出行',
+    subtitle: '脊髓灰质炎 · 轮椅出行 · 创始成员',
     sections: [
       { html: '<img class="ad-member-full" src="assets/members/chengliting.png" alt="程丽婷照片">' },
-      { h: '身份', p: '主音吉他手。资料里她最有画面感的，是在行动和舞台之间来回穿梭的身影。' },
-      { h: '细节', p: '她的存在补上了你网页里此前缺掉的“真实成员层”，也让乐队不再只是 4 个人的抽象版。' },
+      { h: '她是谁', p: '主音吉他手，乐队创始成员之一。脊髓灰质炎，轮椅出行。曾考取北京首批残疾人驾照——在加入乐队之前，她已经在用行动拓宽自己的边界。' },
+      { h: '舞台上', p: '她是乐队里最有画面感的存在：行动和舞台之间来回穿梭，排练时把轮椅停在吉他架旁边，演完再把琴挂回去，推着自己走。' },
     ],
   },
   'member-sujianing': {
     tag: 'MEMBER · 队长/贝斯手', title: '苏佳宇',
-    subtitle: '马凡氏综合征 · 四肢纤长 · 三次心脏手术',
+    subtitle: '马凡氏综合征 · 身高约两米 · 三次心脏手术',
     sections: [
       { html: '<img class="ad-member-full" src="assets/members/sujiayu.jpg" alt="苏佳宇照片">' },
-      { h: '身份', p: '队长、贝斯手。资料里他是把节奏和秩序撑起来的人。' },
-      { h: '细节', p: '他对“能在上万人的场地演出”有非常明确的想象，这种愿望很适合放进时间轴里。' },
+      { h: '他是谁', p: '队长、贝斯手，40 多岁。马凡氏综合征，身高约两米，四肢纤长，心脏瓣膜是金属的，做过三次心脏手术。2018 年看了一场 8772 的演出，受触动后加入。' },
+      { h: '排练日常', p: '住通州，每次排练单程一个半小时。下午两点排练，六点一刻就得出发，五点就吃饭，为了不迟到就这样卷。他的第一把贝斯 500 块含音箱，琴颈已经歪了，还放在老家。' },
+      { h: '他说', p: '"一把吉他就能唱歌，想去做这件事总归能找到理由。最难的是这些人能够匹配到一块儿，一起去往下走。"毕业后就没怎么碰过篮球，他说那是这辈子很大的遗憾；上台时的感觉，跟以前球场上的欢呼类似。' },
     ],
   },
   'member-xiaolin': {
@@ -3579,6 +3857,17 @@ const ARCHIVE_DATA = {
         '国家卫健委罕见病诊疗协作网',
         '中国罕见病联盟',
       ]},
+    ],
+  },
+  'production-team': {
+    tag: 'CREDITS · 制作团队', title: '六分之一引力制作组',
+    subtitle: '2026 · 融合新闻报道与制作课程作品',
+    sections: [
+      { h: '指导老师', p: '翁旭东 · 孙洪亮' },
+      { h: '策划', p: '马德盛' },
+      { h: '美术', p: '马德盛 · 张圣涵' },
+      { h: '程序', p: '任毅 · 马德盛' },
+      { h: '文案', p: '尹鹏贺 · 周子昂 · 王晨旭' },
     ],
   },
 };
@@ -3725,6 +4014,11 @@ function loadTrack(idx) {
   _audio.preload = 'auto';
   _audio.volume = 0;
   _audio.addEventListener('loadedmetadata', () => { progressTime.textContent = formatTime(0); });
+  // v5.17: 用 canplay 事件替代硬编码 setTimeout，适应不同网络速度
+  _audio.addEventListener('canplay', function _onCanPlay() {
+    _loadingTrack = false;
+    _audio.removeEventListener('canplay', _onCanPlay);
+  }, { once: true });
   _audio.addEventListener('play', () => {
     STATE.audioActive = true; syncVinylState(); bgmDuck();
     fadeIn();
@@ -3743,7 +4037,6 @@ function loadTrack(idx) {
   progressFill.style.width = '0%';
   progressTime.textContent = '00:00';
   selectTrackItem(idx);
-  setTimeout(() => { _loadingTrack = false; }, 120);
 }
 
 function openMusicPanel() {
@@ -3816,6 +4109,7 @@ let bgmEnabled = false;
 let bgmTargetVol = 0.28;
 let bgmDucked = false;
 let bgmFadeRaf = null;
+let _bgmPauseTimer = null;
 
 function setBgmToggleState(on) {
   bgmToggle.classList.toggle('on', on);
@@ -3839,6 +4133,7 @@ function fadeBgmTo(targetVol, duration = 900) {
 
 function bgmPlayIfEnabled() {
   if (!bgmEnabled || bgmDucked || _loadingTrack) return;
+  if (_bgmPauseTimer) { clearTimeout(_bgmPauseTimer); _bgmPauseTimer = null; }
   if (bgmAudio.paused) {
     bgmAudio.volume = 0;
     bgmAudio.play().catch(() => {});
@@ -3849,7 +4144,8 @@ function bgmPlayIfEnabled() {
 function bgmPause() {
   if (bgmAudio.paused) return;
   fadeBgmTo(0, 400);
-  setTimeout(() => { if (bgmAudio.volume < 0.02) bgmAudio.pause(); }, 420);
+  if (_bgmPauseTimer) clearTimeout(_bgmPauseTimer);
+  _bgmPauseTimer = setTimeout(() => { if (bgmAudio.volume < 0.02) bgmAudio.pause(); _bgmPauseTimer = null; }, 420);
 }
 
 function bgmDuck() {
@@ -4597,7 +4893,7 @@ window.addEventListener('pointermove', onPointerMove);
 var KEY_TO_FOCUS_TYPE = {
   'record-diag': 'record', 'record-edu': 'record', 'record-employ': 'record',
   'record-drug': 'record', 'record-access': 'record', 'record-social': 'record',
-  'click-bottle': 'bottle', 'drug-catalog': 'bottle', 'drug-medicare': 'bottle', 'drug-payment': 'bottle', 'drug-network': 'bottle', 'drug-gap': 'bottle', 'drug-pipeline': 'bottle',
+  'click-bottle': 'bottle', 'drug-catalog': 'bottle', 'drug-medicare': 'bottle', 'drug-payment': 'bottle', 'drug-network': 'bottle', 'drug-gap': 'bottle', 'drug-pipeline': 'bottle', 'drug-sma': 'bottle', 'drug-risdiplam': 'bottle', 'drug-fabry': 'bottle', 'drug-gaucher': 'bottle', 'drug-hemophilia': 'bottle', 'drug-mps': 'bottle', 'drug-direct-report': 'bottle', 'drug-province': 'bottle', 'drug-clinical-trial': 'bottle', 'drug-86-billion': 'bottle',
   'click-mic': 'mic', 'click-stage-mic': 'mic',
   'label-shencanjianjian': 'label', 'label-kelian': 'label', 'label-lizhi': 'label',
   'label-buzhengchang': 'label', 'label-canji': 'label', 'label-yonggan': 'label',
@@ -4642,7 +4938,7 @@ function registerInteractables() {
     clickMap.set(sheet, { key: sheet.userData.recordKey || 'record-diag', label: '病历档案' });
   });
   // 药瓶 → 分配不同药品/医保/目录档案
-  const bottleKeys = ['drug-catalog', 'drug-medicare', 'drug-payment', 'drug-network', 'drug-gap', 'drug-pipeline'];
+  const bottleKeys = ['drug-catalog', 'drug-medicare', 'drug-payment', 'drug-network', 'drug-gap', 'drug-pipeline', 'drug-sma', 'drug-risdiplam', 'drug-fabry', 'drug-gaucher', 'drug-hemophilia', 'drug-mps', 'drug-direct-report', 'drug-province', 'drug-clinical-trial', 'drug-86-billion'];
   bottleGrid.children.forEach((b, idx) => {
     const key = b.userData.drugKey || bottleKeys[idx % bottleKeys.length];
     clickMap.set(b, { key: key, label: '药品档案' });
@@ -4705,7 +5001,7 @@ function createHint(mesh, labelText) {
 if (portraitFrames.children[0]) createHint(portraitFrames.children[0], '崔莹');
 if (portraitFrames.children[1]) createHint(portraitFrames.children[1], '苏佳宇');
 if (portraitFrames.children[2]) createHint(portraitFrames.children[2], '王奕鸥');
-if (portraitFrames.children[3]) createHint(portraitFrames.children[3], '李烨');
+if (portraitFrames.children[3]) createHint(portraitFrames.children[3], '程丽婷');
 if (bottleGrid.children[0]) createHint(bottleGrid.children[0], '药品目录');
 if (tunnelProps.children[0]) createHint(tunnelProps.children[0], '排练室');
 // 磁带
@@ -4794,15 +5090,68 @@ function clearHoverScale() {
 }
 
 /* ═══════ Lenis ═══════ */
+let lenisInstance = null;
 if (window.Lenis) {
-  const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  lenisInstance = new Lenis({ lerp: 0.1, smoothWheel: true });
+  function raf(time) { lenisInstance.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 }
 
+/* ═══════ v5.12 面板打开时暂停 Lenis，允许子页面原生滚动 ═══════ */
+function pauseLenis() { if (lenisInstance) lenisInstance.stop(); }
+function resumeLenis() { if (lenisInstance) lenisInstance.start(); }
+
+// v5.16：wheel 事件手动驱动子页面卡片滚动，绕过 Lenis 拦截
+function _onSubPageWheel(e) {
+  // 只处理当前可见的卡片（父级 overlay 有 .open）
+  var card = e.currentTarget;
+  var overlay = card.closest('.record-focus-overlay, .timeline-overlay, .music-overlay, .archive-drawer');
+  if (!overlay || !overlay.classList.contains('open')) return;
+
+  var before = card.scrollTop;
+  var maxScroll = card.scrollHeight - card.clientHeight;
+  var dy = e.deltaY;
+  // deltaMode: 0=px, 1=line(~40px), 2=page(~800px)
+  if (e.deltaMode === 1) dy *= 40;
+  else if (e.deltaMode === 2) dy *= 800;
+
+  // 使用 deltaY 滚动，带一点惯性衰减
+  card.scrollTop = Math.max(0, Math.min(maxScroll, card.scrollTop + dy));
+
+  // 只要卡片还能在此方向滚动，就阻止默认行为（防止穿透到主页面）
+  var atTop = card.scrollTop <= 0 && dy < 0;
+  var atBottom = card.scrollTop >= maxScroll && dy > 0;
+  if (!atTop && !atBottom) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}
+
+// 初始化时给所有子页面卡片绑定 wheel 监听（被动模式关闭以允许 preventDefault）
+document.querySelectorAll('.record-focus-card, .timeline-panel, .music-panel, .archive-drawer').forEach(function(card) {
+  card.addEventListener('wheel', _onSubPageWheel, { passive: false });
+});
+
+// 监听所有 overlay/drawer 的 open 状态
+const _overlayObserver = new MutationObserver(() => {
+  const anyOpen = document.querySelector(
+    '.archive-drawer.open, .music-overlay.open, .timeline-overlay.open, .record-focus-overlay.open'
+  );
+  if (anyOpen) {
+    pauseLenis();
+    document.body.style.overflow = 'hidden'; // 防止主页面滚动穿透
+  } else {
+    resumeLenis();
+    document.body.style.overflow = '';
+  }
+});
+
+document.querySelectorAll('.archive-drawer, .music-overlay, .timeline-overlay, .record-focus-overlay').forEach(el => {
+  _overlayObserver.observe(el, { attributes: true, attributeFilter: ['class'] });
+});
+
 onScroll();
-console.log('%c呐罕 v5.6 · 时间轴面板重构 · 暖纸档案+飞前展开', 'color:#E85D3C;font-size:16px;font-weight:bold;');
-console.log('%c年份Sprite飞行动画 · 英雄数据+动画进度条 · 国际对照卡片', 'color:#A89B85;');
+console.log('%c呐罕 v5.21 · 非均匀摄像机映射 · 物件垂直居中', 'color:#E85D3C;font-size:16px;font-weight:bold;');
 </script>
 
 </body>
